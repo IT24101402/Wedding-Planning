@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wedding Booking</title>
+    <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+<div class="container">
+    <h1>Book Your Wedding Service</h1>
+    <form id="bookingForm">
+        <input type="text" placeholder="Your Name" name="userName" required>
+        <input type="text" placeholder="Vendor Name" name="vendorName" required>
+        <input type="text" placeholder="Service Type" name="serviceType" required>
+        <input type="date" name="bookingDate" required>
+        <input type="time" name="bookingTime" required>
+        <button type="submit">Book Now</button>
+    </form>
+    <p id="responseMsg"></p>
+</div>
+
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      data.bookingId = Date.now().toString();
+
+      const res = await fetch('http://localhost:8080/bookings', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      const msg = await res.text();
+      document.getElementById('responseMsg').innerText = msg;
+      e.target.reset();
+    });
+</script>
+</body>
+</html>
