@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Booking Overview</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<h1>All Bookings (Admin View)</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Booking ID</th>
+        <th>User</th>
+        <th>Vendor</th>
+        <th>Service</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+    </thead>
+    <tbody id="adminBookingBody"></tbody>
+</table>
+
+<script>
+    fetch('http://localhost:8080/bookings/all')
+        .then(response => response.json())
+        .then(bookings => {
+            const tbody = document.getElementById('adminBookingBody');
+            bookings.forEach(b => {
+                const row = `<tr>
+                    <td>${b.bookingId}</td>
+                    <td>${b.userName}</td>
+                    <td>${b.vendorName}</td>
+                    <td>${b.serviceType}</td>
+                    <td>${b.bookingDate}</td>
+                    <td>${b.bookingTime}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        });
+</script>
+</body>
+</html>
