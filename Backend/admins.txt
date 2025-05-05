@@ -1,0 +1,2 @@
+admin01,KasunAdmin,adminpass123
+12345,Kasun,A12345
