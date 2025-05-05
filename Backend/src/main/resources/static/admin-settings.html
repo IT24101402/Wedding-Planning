@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Settings</title>
+    <link rel="stylesheet" href="admin-settings.css">
+</head>
+<body>
+<div class="settings-container">
+    <h1>Admin Settings</h1>
+
+    <form id="settingsForm">
+        <label>Platform Rules:</label>
+        <textarea id="rules" rows="5" placeholder="Enter new platform rules here..."></textarea>
+
+        <label>Change Password:</label>
+        <input type="password" id="oldPassword" placeholder="Old Password" required>
+        <input type="password" id="newPassword" placeholder="New Password" required>
+
+        <button type="submit">Update Settings</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("settingsForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const payload = {
+            oldPassword: document.getElementById("oldPassword").value,
+            newPassword: document.getElementById("newPassword").value,
+            rules: document.getElementById("rules").value
+        };
+
+        fetch("http://localhost:8080/admin/update-settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.text())
+        .then(msg => alert("Settings Updated: " + msg));
+    });
+</script>
+</body>
+</html>
