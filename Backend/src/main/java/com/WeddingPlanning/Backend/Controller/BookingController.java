@@ -4,20 +4,32 @@ import com.WeddingPlanning.Backend.Model.Booking;
 import com.WeddingPlanning.Backend.Service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.stream.Collectors;
+import com.WeddingPlanning.Backend.Config.BookingFileHandler;
+
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/bookings")
 @CrossOrigin(origins = "*")
+
 public class BookingController {
 
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping
+    @GetMapping("/user/{username}")
+    public List<Booking> getBookingsByUsername(@PathVariable String username) {
+        List<Booking> allBookings = BookingFileHandler.readBookingsFromFile();
+        return allBookings.stream()
+                .filter(b -> b.getUserName().equalsIgnoreCase(username))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/all")
     public List<Booking> getAllBookings() {
-        return bookingService.getAllBookings();
+        return BookingFileHandler.readBookingsFromFile();
     }
 
     @PostMapping
