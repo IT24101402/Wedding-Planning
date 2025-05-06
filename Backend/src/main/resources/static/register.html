@@ -71,35 +71,40 @@
   </style>
 </head>
 <body>
-<div class="container">
-  <h2>User Registration</h2>
-  <input type="text" id="username" placeholder="Username" />
-  <input type="text" id="email" placeholder="Email" />
+
+
+<!-- Inside your register.html -->
+<form id="registerForm">
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="text" id="email" placeholder="Email" required>
   <input type="text" id="phone" placeholder="Phone" />
-  <input type="password" id="password" placeholder="Password" />
-  <button onclick="register()">Register</button>
-  <div class="message" id="message"></div>
-</div>
+  <input type="password" id="password" placeholder="Password" required>
+  <button type="submit">Register</button>
+</form>
 
 <script>
-  function register() {
-    const user = {
+  document.getElementById("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const data = {
       username: document.getElementById("username").value,
       email: document.getElementById("email").value,
-      password: document.getElementById("password").value,
-      phone: document.getElementById("phone").value
+      phone: document.getElementById("phone").value,
+      password: document.getElementById("password").value
     };
 
     fetch("http://localhost:8080/api/users/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user)
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
     })
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("message").innerText = data;
-      });
-  }
+    .then(response => response.text())
+    .then(msg => alert(msg))
+    .catch(error => alert("Registration failed: " + error));
+  });
 </script>
+
 </body>
 </html>
