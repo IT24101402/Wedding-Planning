@@ -1,17 +1,16 @@
 package com.WeddingPlanning.Backend.Repository;
 
-import com.WeddingPlanning.Backend.Model.*;
+import com.WeddingPlanning.Backend.Model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.util.*;
 
 public class UserFileRepository implements UserRepository {
     private static final Logger logger = LoggerFactory.getLogger(UserFileRepository.class);
-    private static final String FILE_PATH = "users.txt";
+    private static final String FILE_PATH = "users.txt"; // Looks in root project folder
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -26,7 +25,7 @@ public class UserFileRepository implements UserRepository {
 
     @Override
     public User getUserByUsername(String username) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(FILE_PATH).getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(getFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 User user = deserialize(line);
@@ -43,19 +42,14 @@ public class UserFileRepository implements UserRepository {
     @Override
     public synchronized void updateUser(User updatedUser) {
         List<User> users = getAllUsers();
-        boolean userUpdated = false;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile()))) {
             for (User user : users) {
-                if (user.getUsername().equals(updatedUser.getUsername()) && !userUpdated) {
+                if (user.getUsername().equals(updatedUser.getUsername())) {
                     writer.write(serialize(updatedUser));
-                    userUpdated = true;
                 } else {
                     writer.write(serialize(user));
                 }
                 writer.newLine();
-            }
-            if (!userUpdated) {
-                logger.warn("User with username {} not found for update.", updatedUser.getUsername());
             }
         } catch (IOException e) {
             logger.error("Error updating user: {}", updatedUser.getUsername(), e);
@@ -79,7 +73,7 @@ public class UserFileRepository implements UserRepository {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(FILE_PATH).getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(getFile()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 User user = deserialize(line);
@@ -93,30 +87,30 @@ public class UserFileRepository implements UserRepository {
         return users;
     }
 
-    // Helper method to get the file path
     private File getFile() {
+        File file = new File(FILE_PATH);
         try {
-            return new ClassPathResource(FILE_PATH).getFile();
+            if (!file.exists()) file.createNewFile();
         } catch (IOException e) {
-            logger.error("Error getting the file path: {}", FILE_PATH, e);
-            return new File(FILE_PATH);
+            logger.error("Could not create users.txt", e);
         }
+        return file;
     }
 
     private String serialize(User user) {
         try {
-            return objectMapper.writeValueAsString(user); // Using Jackson for serialization
+            return objectMapper.writeValueAsString(user);
         } catch (IOException e) {
-            logger.error("Error serializing user: {}", user.getUsername(), e);
+            logger.error("Serialization failed", e);
             return "";
         }
     }
 
     private User deserialize(String line) {
         try {
-            return objectMapper.readValue(line, User.class); // Using Jackson for deserialization
+            return objectMapper.readValue(line, User.class);
         } catch (IOException e) {
-            logger.error("Error deserializing line: {}", line, e);
+            logger.error("Deserialization failed", e);
             return null;
         }
     }
