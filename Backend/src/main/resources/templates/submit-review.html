@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Review</title>
+  <style>
+    body { font-family: Arial; background-color: #f4f4f4; padding: 20px; }
+    form { background: #fff; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; }
+    input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background-color: #28a745; color: white; padding: 10px; border: none; width: 100%; border-radius: 5px; }
+  </style>
+</head>
+<body>
+<h2 style="text-align:center;">Submit Review</h2>
+<form action="/submit" method="post">
+  <input type="text" name="vendorName" placeholder="Vendor Name" required>
+  <input type="text" name="reviewerName" placeholder="Your Name" required>
+  <textarea name="content" placeholder="Your review" required></textarea>
+  <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+  <select name="type">
+    <option value="verified">Verified</option>
+    <option value="guest">Guest</option>
+  </select>
+  <button type="submit">Submit</button>
+</form>
+<p style="text-align:center;"><a href="/view">View All Reviews</a></p>
+</body>
+</html>

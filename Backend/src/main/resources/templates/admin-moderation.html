@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #eef; }
+    .review { background: #fff; padding: 15px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 8px; }
+    form { display: inline; }
+    button { background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+<h2>Admin Moderation Panel</h2>
+<div th:each="review : ${reviews}" class="review">
+  <strong th:text="${review.vendorName}"></strong><br>
+  <em th:text="${review.reviewerName}"></em><br>
+  <span th:text="'Rating: ' + ${review.rating}"></span><br>
+  <p th:text="${review.content}"></p>
+  <form action="/delete" method="post">
+    <input type="hidden" name="reviewerName" th:value="${review.reviewerName}" />
+    <button type="submit">Delete</button>
+  </form>
+</div>
+<p><a href="/view">Back to Reviews</a></p>
+</body>
+</html>
