@@ -23,7 +23,7 @@ public class BookingController {
     public List<Booking> getBookingsByUsername(@PathVariable String username) {
         List<Booking> allBookings = BookingFileHandler.readBookingsFromFile();
         return allBookings.stream()
-                .filter(b -> b.getUserName().equalsIgnoreCase(username))
+                .filter(b -> b.getUserName().equals(username))
                 .collect(Collectors.toList());
     }
 
