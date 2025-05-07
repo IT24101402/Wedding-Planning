@@ -1,6 +1,11 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f3f3f3;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+                url('admin-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
 }
@@ -9,14 +14,16 @@ body {
     width: 90%;
     margin: auto;
     padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px #ccc;
+    background: #ffffffcc;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
+    border-radius: 10px;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #1e3c72;
+    font-weight: 600;
 }
 
 .section {
@@ -30,12 +37,12 @@ table {
 }
 
 th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #dce3ec;
     padding: 12px;
     text-align: left;
 }
 
 th {
-    background-color: #007BFF;
+    background-color: #4a90e2;
     color: white;
 }
