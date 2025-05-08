@@ -3,19 +3,60 @@
 <head>
   <title>All Reviews</title>
   <style>
-    body { font-family: Arial; background-color: #f8f9fa; padding: 20px; }
-    .review { background: #fff; padding: 15px; margin-bottom: 10px; border-left: 5px solid #007bff; border-radius: 5px; }
-    .verified { border-color: green; }
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+    body {
+      background-image: url('/background_whole.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: rgba(255,255,255,0.5); /* This fades it a bit */
+      background-blend-mode: lighten;
+
+    }
+    h2 {
+      text-align: center;
+      color: #7a2a7a;
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgb(46, 5, 46);
+    }
+    th {
+      background-color: #d1a8d1;
+      color: #000;
+      padding: 10px;
+    }
+    td {
+      background-color: #ddc8dd;
+      padding: 10px;
+      border: 1px solid #bc80bc;
+    }
   </style>
 </head>
 <body>
 <h2>All Reviews</h2>
-<div th:each="review : ${reviews}" th:class="'review ' + (${review.verified} ? 'verified' : '')">
-  <strong th:text="${review.vendorName}"></strong><br>
-  <em th:text="${review.reviewerName}"></em><br>
-  <span th:text="'Rating: ' + ${review.rating}"></span><br>
-  <p th:text="${review.content}"></p>
-</div>
-<p><a href="/">Submit Another Review</a> | <a href="/admin">Admin Panel</a></p>
+<table>
+  <tr>
+    <th>Vendor Name</th>
+    <th>Reviewer</th>
+    <th>Type</th>
+    <th>Rating</th>
+    <th>Review</th>
+  </tr>
+  <tr th:each="review : ${reviews}">
+    <td th:text="${review.vendorName}"></td>
+    <td th:text="${review.reviewerName}"></td>
+    <td th:text="${review.type}"></td>
+    <td th:text="${review.rating}"></td>
+    <td th:text="${review.content}"></td>
+  </tr>
+</table>
+<p style="text-align:center; margin-top: 20px;">
+  <a href="/" style="color:#4a0d4a;">Submit Another Review</a> |
+  <a href="/admin" style="color:#4a0d4a;">Admin Panel</a>
+</p>
 </body>
 </html>

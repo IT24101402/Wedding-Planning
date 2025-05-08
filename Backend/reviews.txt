@@ -1,2 +1,4 @@
-guest,kamal,hansika,nice venue,3
-guest,Nimal,hansika,great planning!,5
+guest,The Tiffany Ballroom,Sherol,Everything was so organized and professional. The food was fantastic,5
+guest,Seaport Hotel,Jimmy,Seaport hotel is an incredible wedding venue that I would highly recommend! Their ceremony and reception spaces are gorgeous  including plenty of windows to take in the ocean views.,4
+verified,The Tiffany Ballroom,Claire,The packages made such an easy process for planning the wedding and were very flexible to what we were looking for- with our package we worked with the florist and the bakery they partner along with and both were amazing.,5
+verified,Emma Florist,Samantha,Emma Florist made our wedding look amazing! They arranged flowers that matched our colors and aesthetic and also created a hanging plant piece that was specific to our venue.,4

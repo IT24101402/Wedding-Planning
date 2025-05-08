@@ -1,40 +1,37 @@
 package com.WeddingPlanning.Backend.Model;
 
-import java.io.Serializable;
+public class Review {
+    private String vendorName;
+    private String reviewerName;
+    private String content;
+    private int rating;
+    private String type; // verified or guest
 
-public abstract class Review implements Serializable {
-    protected String vendorName;
-    protected String reviewerName;
-    protected String content;
-    protected int rating;
-
-    public Review(String vendorName, String reviewerName, String content, int rating) {
+    public Review(String vendorName, String reviewerName, String content, int rating, String type) {
         this.vendorName = vendorName;
         this.reviewerName = reviewerName;
         this.content = content;
         this.rating = rating;
+        this.type = type;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public String getVendorName() {
+        return vendorName;
     }
 
-    public void setReviewerName(String reviewerName) {
-        this.reviewerName = reviewerName;
+    public String getReviewerName() {
+        return reviewerName;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public String getContent() {
+        return content;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public int getRating() {
+        return rating;
     }
 
-    public abstract boolean isVerified();
-
-    public String getVendorName() { return vendorName; }
-    public String getReviewerName() { return reviewerName; }
-    public String getContent() { return content; }
-    public int getRating() { return rating; }
+    public String getType() {
+        return type;
+    }
 }

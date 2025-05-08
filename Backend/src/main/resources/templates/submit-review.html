@@ -3,14 +3,55 @@
 <head>
   <title>Submit Review</title>
   <style>
-    body { font-family: Arial; background-color: #f4f4f4; padding: 20px; }
-    form { background: #fff; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; }
-    input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; }
-    button { background-color: #28a745; color: white; padding: 10px; border: none; width: 100%; border-radius: 5px; }
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('/background_whole.jpg');
+      background-size: cover;
+      padding: 20px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      color: #7a2a7a;
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+    }
+    form {
+      background-image: url('/background_part.jpg');
+      background-size: cover;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #800080;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+    }
+    a {
+      color: #2e052e;
+      text-align: center;
+      display: block;
+      margin-top: 15px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
-<h2 style="text-align:center;">Submit Review</h2>
+<h2>Submit Your Review</h2>
 <form action="/submit" method="post">
   <input type="text" name="vendorName" placeholder="Vendor Name" required>
   <input type="text" name="reviewerName" placeholder="Your Name" required>
@@ -22,6 +63,6 @@
   </select>
   <button type="submit">Submit</button>
 </form>
-<p style="text-align:center;"><a href="/view">View All Reviews</a></p>
+<a href="/view">View All Reviews</a>
 </body>
 </html>

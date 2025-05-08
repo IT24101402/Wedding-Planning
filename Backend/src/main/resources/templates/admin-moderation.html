@@ -1,26 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Panel</title>
-  <style>
-    body { font-family: Arial; padding: 20px; background-color: #eef; }
-    .review { background: #fff; padding: 15px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 8px; }
-    form { display: inline; }
-    button { background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; }
-  </style>
+    <title>Admin Panel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+        body {
+            background-image: url('/background_whole.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(255,255,255,0.5); /* This fades it a bit */
+            background-blend-mode: lighten;
+        }
+        h2 {
+            text-align: center;
+            color: #7a2a7a;
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgb(46, 5, 46);
+        }
+        th {
+            background-color: #d1a8d1;
+            padding: 10px;
+        }
+        td {
+            background-color: #ddc8dd;
+            padding: 10px;
+            border: 1px solid #bc80bc;
+        }
+        button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a {
+            color: #4a0d4a;
+            text-align: center;
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <h2>Admin Moderation Panel</h2>
-<div th:each="review : ${reviews}" class="review">
-  <strong th:text="${review.vendorName}"></strong><br>
-  <em th:text="${review.reviewerName}"></em><br>
-  <span th:text="'Rating: ' + ${review.rating}"></span><br>
-  <p th:text="${review.content}"></p>
-  <form action="/delete" method="post">
-    <input type="hidden" name="reviewerName" th:value="${review.reviewerName}" />
-    <button type="submit">Delete</button>
-  </form>
+<table>
+    <tr>
+        <th>Vendor Name</th>
+        <th>Reviewer</th>
+        <th>Type</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.vendorName}"></td>
+        <td th:text="${review.reviewerName}"></td>
+        <td th:text="${review.type}"></td>
+        <td th:text="${review.rating}"></td>
+        <td th:text="${review.content}"></td>
+        <td>
+            <form action="/delete" method="post">
+                <input type="hidden" name="reviewerName" th:value="${review.reviewerName}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div style="text-align:center;">
+    <a href="/">Submit New Review</a> |
+    <a href="/view">View All Reviews</a>
 </div>
-<p><a href="/view">Back to Reviews</a></p>
 </body>
 </html>
