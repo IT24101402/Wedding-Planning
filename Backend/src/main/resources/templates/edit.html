@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Vendor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('/Users/tharukakumarasiri/Wedding-Planning/Backend/src/main/resources/templates/iStock-953087644-1-e1547109570371.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    h2 {
+      text-align: center;
+      color: #c94f7c;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      width: 420px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #c94f7c;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #ffc107;
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e0a800;
+    }
+
+    a {
+      display: inline-block;
+      margin-left: 15px;
+      color: #c94f7c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<form action="/vendors/update" method="post">
+  <h2>Edit Vendor</h2>
+
+  <input type="hidden" name="id" th:value="${vendor.id}">
+
+  <label>Name:</label>
+  <input type="text" name="name" th:value="${vendor.name}" required>
+
+  <label>Category:</label>
+  <input type="text" name="category" th:value="${vendor.category}" required>
+
+  <label>Price:</label>
+  <input type="number" step="0.01" name="price" th:value="${vendor.price}" required>
+
+  <label>Contact:</label>
+  <input type="text" name="contact" th:value="${vendor.contact}" required>
+
+  <button type="submit">Update</button>
+  <a href="/vendors">Back to List</a>
+</form>
+
+</body>
+</html>

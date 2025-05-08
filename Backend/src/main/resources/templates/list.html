@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #f0f9ff);
+      background-image: url('/Users/tharukakumarasiri/Wedding-Planning/Backend/src/main/resources/templates/wedding-invitation-with-rings-and-flowers-free-photo.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h2 {
+      color: #c94f7c;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .register-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #c94f7c;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .register-btn:hover {
+      background-color: #b83c6b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #fcd6e5;
+      color: #4a4a4a;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #fff0f5;
+    }
+
+    a.action-link {
+      margin: 0 6px;
+      text-decoration: none;
+      font-weight: 500;
+      color: #5a5a5a;
+      transition: color 0.2s ease;
+    }
+
+    a.action-link:hover {
+      color: #c94f7c;
+    }
+
+    a.delete-link {
+      color: #dc3545;
+    }
+
+    a.delete-link:hover {
+      color: #a71d2a;
+    }
+
+    a.edit-link {
+      color: #28a745;
+    }
+
+    a.edit-link:hover {
+      color: #1e7e34;
+    }
+  </style>
+</head>
+<body>
+
+<h2>All Registered Vendors</h2>
+
+<div style="text-align: right;">
+  <a href="/vendors/register" class="register-btn">+ Register New</a>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Price</th>
+    <th>Contact</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="vendor : ${vendors}">
+    <td th:text="${vendor.id}"></td>
+    <td th:text="${vendor.name}"></td>
+    <td th:text="${vendor.category}"></td>
+    <td>Rs. <span th:text="${vendor.price}"></span></td>
+    <td th:text="${vendor.contact}"></td>
+    <td>
+      <a th:href="@{'/vendors/edit/' + ${vendor.id}}" class="action-link edit-link">Edit</a> |
+      <a th:href="@{'/vendors/delete/' + ${vendor.id}}" class="action-link delete-link"
+         onclick="return confirm('Are you sure you want to delete this vendor?')">Delete</a> |
+      <a th:href="@{'/vendors/view/' + ${vendor.id}}" class="action-link">Profile</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

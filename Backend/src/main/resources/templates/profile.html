@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Vendor Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #f0f9ff);
+      background-image: url('/Users/tharukakumarasiri/Wedding-Planning/Backend/src/main/resources/templates/iStock-953087644-1-e1547109570371.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .profile-card {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: left;
+    }
+
+    h2 {
+      text-align: center;
+      color: #c94f7c;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    strong {
+      color: #c94f7c;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #c94f7c;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    a.button:hover {
+      background-color: #b83c6b;
+    }
+
+    .actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .actions a:last-child {
+      margin-left: 10px;
+      background-color: #6c757d;
+    }
+
+    .actions a:last-child:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+
+<div class="profile-card">
+  <h2>Vendor Profile</h2>
+  <p><strong>ID:</strong> <span th:text="${vendor.id}"></span></p>
+  <p><strong>Name:</strong> <span th:text="${vendor.name}"></span></p>
+  <p><strong>Category:</strong> <span th:text="${vendor.category}"></span></p>
+  <p><strong>Price:</strong> Rs. <span th:text="${vendor.price}"></span></p>
+  <p><strong>Contact:</strong> <span th:text="${vendor.contact}"></span></p>
+
+  <div class="actions">
+    <a class="button" th:href="@{'/vendors/edit/' + ${vendor.id}}">Edit</a>
+    <a class="button" href="/vendors">Back to List</a>
+  </div>
+</div>
+
+</body>
+</html>
