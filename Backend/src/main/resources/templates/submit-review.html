@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
   <title>Submit Review</title>
   <style>
@@ -13,9 +13,9 @@
     }
     h2 {
       text-align: center;
-      color: #7a2a7a;
+      color: #531753;
       font-family: 'Dancing Script', cursive;
-      font-size: 32px;
+      font-size: 35px;
     }
     form {
       background-image: url('/background_part.jpg');
@@ -34,7 +34,7 @@
       border-radius: 5px;
     }
     button {
-      background-color: #800080;
+      background-color: #530853;
       color: white;
       padding: 10px;
       border: none;
@@ -42,27 +42,35 @@
       border-radius: 5px;
     }
     a {
-      color: #2e052e;
-      text-align: center;
-      display: block;
-      margin-top: 15px;
-      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 <h2>Submit Your Review</h2>
 <form action="/submit" method="post">
-  <input type="text" name="vendorName" placeholder="Vendor Name" required>
-  <input type="text" name="reviewerName" placeholder="Your Name" required>
-  <textarea name="content" placeholder="Your review" required></textarea>
-  <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
-  <select name="type">
-    <option value="verified">Verified</option>
-    <option value="guest">Guest</option>
-  </select>
+  <label>
+    <input type="text" name="vendorName" placeholder="Vendor Name" required>
+  </label>
+  <label>
+    <input type="text" name="reviewerName" placeholder="Your Name" required>
+  </label>
+  <label>
+    <textarea name="content" placeholder="Your review" required></textarea>
+  </label>
+  <label>
+    <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+  </label>
+  <label>
+    <select name="type">
+      <option value="verified">Verified</option>
+      <option value="guest">Guest</option>
+    </select>
+  </label>
   <button type="submit">Submit</button>
 </form>
-<a href="/view">View All Reviews</a>
+<p style="text-align:center; margin-top: 20px;">
+  <a href="/view" style="color:#4a0d4a;" >View All Reviews</a>
+</p>
 </body>
 </html>

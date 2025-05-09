@@ -7,6 +7,6 @@ public class VerifiedReview extends com.WeddingPlanning.Backend.Model.Review {
 
     @Override
     public String display() {
-        return "Verified Review by " + getReviewerName() + ": " + getContent();
+        return "Verified_User:  "  + getContent();
     }
 }

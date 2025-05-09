@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <title>Admin Panel</title>
     <style>
@@ -15,23 +15,32 @@
         }
         h2 {
             text-align: center;
-            color: #7a2a7a;
+            color: #531753;
             font-family: 'Dancing Script', cursive;
-            font-size: 32px;
+            font-size: 35px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            background: rgb(46, 5, 46);
+            background: rgb(60, 19, 60);
         }
         th {
             background-color: #d1a8d1;
             padding: 10px;
         }
         td {
-            background-color: #ddc8dd;
             padding: 10px;
             border: 1px solid #bc80bc;
+        }
+        .verified {
+            background-color: #ddc8dd;
+            font-weight: bold;
+            color: #4c1f4c;
+        }
+        .guest {
+            background-color: #efe8ef;
+            font-style: italic;
+            color: #4c1f4c;
         }
         button {
             background: red;
@@ -41,12 +50,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        a {
-            color: #4a0d4a;
-            text-align: center;
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
+        p {
             font-weight: bold;
         }
     </style>
@@ -62,12 +66,13 @@
         <th>Review</th>
         <th>Action</th>
     </tr>
-    <tr th:each="review : ${reviews}">
+    <tr th:each="review : ${reviews}"
+        th:classappend="${review.type.toLowerCase() == 'verified'} ? 'verified' : 'guest'">
         <td th:text="${review.vendorName}"></td>
         <td th:text="${review.reviewerName}"></td>
         <td th:text="${review.type}"></td>
         <td th:text="${review.rating}"></td>
-        <td th:text="${review.content}"></td>
+        <td th:text="${review.display()}"></td>
         <td>
             <form action="/delete" method="post">
                 <input type="hidden" name="id" th:value="${review.id}" />
@@ -76,9 +81,9 @@
         </td>
     </tr>
 </table>
-<div style="text-align:center;">
-    <a href="/">Submit New Review</a> |
-    <a href="/view">View All Reviews</a>
-</div>
+<p style="text-align:center; margin-top: 20px;">
+    <a href="/" style="color:#4a0d4a;" >Submit New Review</a> |
+    <a href="/view" style="color:#4a0d4a;">View All Reviews</a>
+</p>
 </body>
 </html>

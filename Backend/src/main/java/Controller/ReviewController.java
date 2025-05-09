@@ -1,6 +1,8 @@
 package com.WeddingPlanning.Backend.Controller;
 
-import com.WeddingPlanning.Backend.Model.*;
+import com.WeddingPlanning.Backend.Model.GuestReview;
+import com.WeddingPlanning.Backend.Model.Review;
+import com.WeddingPlanning.Backend.Model.VerifiedReview;
 import com.WeddingPlanning.Backend.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,11 @@ public class ReviewController {
                                @RequestParam String content,
                                @RequestParam int rating,
                                @RequestParam String type) {
-        com.WeddingPlanning.Backend.Model.Review review;
+        Review review;
         if (type.equalsIgnoreCase("verified")) {
-            review = new com.WeddingPlanning.Backend.Model.Review(vendorName, reviewerName, content, rating, type);
+            review = new VerifiedReview(vendorName, reviewerName, content, rating);
         } else {
-            review = new com.WeddingPlanning.Backend.Model.GuestReview(vendorName, reviewerName, content, rating);
+            review = new GuestReview(vendorName, reviewerName, content, rating);
         }
         reviewService.addReview(review);
         return "redirect:/view";

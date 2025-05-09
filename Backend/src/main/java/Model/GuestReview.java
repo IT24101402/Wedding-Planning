@@ -7,6 +7,6 @@ public class GuestReview extends com.WeddingPlanning.Backend.Model.Review {
 
     @Override
     public String display() {
-        return "Guest " + getReviewerName() + " wrote: " + getContent();
+        return getContent();
     }
 }

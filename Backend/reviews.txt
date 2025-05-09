@@ -1,4 +1,6 @@
-guest,The Tiffany Ballroom,Sherol,Everything was so organized and professional. The food was fantastic,5
-guest,Seaport Hotel,Jimmy,Seaport hotel is an incredible wedding venue that I would highly recommend! Their ceremony and reception spaces are gorgeous  including plenty of windows to take in the ocean views.,4
-verified,The Tiffany Ballroom,Claire,The packages made such an easy process for planning the wedding and were very flexible to what we were looking for- with our package we worked with the florist and the bakery they partner along with and both were amazing.,5
-verified,Emma Florist,Samantha,Emma Florist made our wedding look amazing! They arranged flowers that matched our colors and aesthetic and also created a hanging plant piece that was specific to our venue.,4
+084fdde5-f091-4b02-9123-c347ed3a91f8		Verified	The Tiffany Ballroom	Sherol	3/5	The packages made such an easy process for planning the wedding and were very flexible to what we were looking for. With our package, we worked with the florist and the bakery they partner along with and both were amazing.
+f93461d8-e6be-4b75-8b13-bc400102eb56		Guest	Seaport Hotel	Jimmy	4/5	Seaport hotel is an incredible wedding venue that I would highly recommend! Their ceremony and reception spaces are gorgeous including plenty of windows to take in the ocean views.
+5579903b-474c-4754-8454-a2dc67f9d809		Verified	Emma Florist	Claire	5/5	Emma Florist made our wedding look amazing! They arranged flowers that matched our colors and aesthetic and also created a hanging plant piece that was specific to our venue.
+c9caaf8c-90a6-4a49-9331-9a60eb4e7d94		Verified	The Royal Suites	Samantha	3/5	The venue is so unique and we absolutely adored the view..
+6094c179-da32-4791-856a-a2246c75899e		Guest	Ivory & Lace Weddings	Jenny	3/5	Everything was so organized and professional. The food was fantastic !
+df9ad628-8389-4243-84d8-397a8c86d2b9		Verified	The Crystal Manor	Hailey	4/5	The venue boasts a sophisticated and elegant ambiance, perfect for a formal event..<3

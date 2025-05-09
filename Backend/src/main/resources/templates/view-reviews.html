@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
   <title>All Reviews</title>
   <style>
@@ -15,9 +15,9 @@
     }
     h2 {
       text-align: center;
-      color: #7a2a7a;
+      color: #531753;
       font-family: 'Dancing Script', cursive;
-      font-size: 32px;
+      font-size: 35px;
     }
     table {
       width: 100%;
@@ -34,6 +34,10 @@
       padding: 10px;
       border: 1px solid #bc80bc;
     }
+    p {
+      font-weight: bold;
+    }
+
   </style>
 </head>
 <body>
@@ -51,7 +55,7 @@
     <td th:text="${review.reviewerName}"></td>
     <td th:text="${review.type}"></td>
     <td th:text="${review.rating}"></td>
-    <td th:text="${review.content}"></td>
+    <td th:text="${review.display()}"></td>
   </tr>
 </table>
 <p style="text-align:center; margin-top: 20px;">
