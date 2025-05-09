@@ -1,18 +1,26 @@
 package com.WeddingPlanning.Backend.Model;
 
+import java.util.UUID;
+
 public class Review {
+    private String id;
     private String vendorName;
     private String reviewerName;
     private String content;
     private int rating;
-    private String type; // verified or guest
+    private String type;
 
     public Review(String vendorName, String reviewerName, String content, int rating, String type) {
+        this.id = UUID.randomUUID().toString();
         this.vendorName = vendorName;
         this.reviewerName = reviewerName;
         this.content = content;
         this.rating = rating;
         this.type = type;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getVendorName() {
@@ -33,5 +41,9 @@ public class Review {
 
     public String getType() {
         return type;
+    }
+
+    public String display() {
+        return reviewerName + " (" + type + "): " + content;
     }
 }
