@@ -37,6 +37,10 @@ public class BookingRepository {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Booking b : all) {
                 if (b.getBookingId().equals(bookingId)) {
+                    // Ensure updated booking keeps the correct bookingId
+                    if (updated.getBookingId() == null || updated.getBookingId().isEmpty()) {
+                        updated.setBookingId(b.getBookingId());
+                    }
                     writer.write(updated.toString());
                 } else {
                     writer.write(b.toString());

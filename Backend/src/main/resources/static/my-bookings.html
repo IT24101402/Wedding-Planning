@@ -59,6 +59,7 @@
         <!-- Bookings will appear here -->
         </tbody>
     </table>
+
 </div>
 
 <script>
@@ -107,14 +108,23 @@
     }
 
     function updateBooking(bookingId) {
-        alert(`Update booking ${bookingId}`);
-        // TODO: Add actual update logic or redirect
+        window.location.href = `booking.html?bookingId=${bookingId}`;
     }
 
     function deleteBooking(bookingId) {
         if (confirm(`Are you sure you want to delete booking ${bookingId}?`)) {
-            // TODO: Call your delete API here
-            alert(`Booking ${bookingId} deleted.`);
+            fetch(`http://localhost:8080/bookings/${bookingId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.text())
+            .then(msg => {
+                alert(msg);
+                loadBookings(); // Refresh the list
+            })
+            .catch(err => {
+                console.error("Error deleting booking:", err);
+                alert("Error deleting booking.");
+            });
         }
     }
 </script>

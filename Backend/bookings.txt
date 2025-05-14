@@ -1,5 +1,7 @@
-1746805900150,Kasun,BestDresser,Wedding Dress,2025-05-09,04:00
+1746805900150,Kasun,Namal Balachandra,Wedding Dress,2025-05-09,04:00
 1746806023033,Ilma,Cinnamon Grand,Banquet Hall,2025-05-09,08:00
 1746806070963,Tharuka,Fantastic Flora,Floral Decorations,2025-05-14,07:30
 1746806147162,Shenali,Amazing DJ,Music Instruments,2025-07-11,10:30
 1746806211112,Tharuka,Vishmi Caters,Food Catering,2025-05-28,11:15
+1746867758272,Pramuditha,Vishmi Wine Stores,Liqour,2025-12-25,10:30
+1747231968603,Vishmi,Ruwi Salon,Beauty Treatments,2025-08-14,04:00

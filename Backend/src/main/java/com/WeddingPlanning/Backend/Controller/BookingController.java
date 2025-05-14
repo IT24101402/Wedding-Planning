@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 import com.WeddingPlanning.Backend.Config.BookingFileHandler;
+import org.springframework.http.ResponseEntity;
+
 
 
 import java.util.List;
@@ -39,17 +41,19 @@ public class BookingController {
     }
 
     @PutMapping("/{id}")
-    public void updateBooking(@PathVariable String id, @RequestBody Booking booking) {
-        bookingService.updateBooking(id, booking);
+    public ResponseEntity<Booking> updateBooking(@PathVariable String id, @RequestBody Booking updatedBooking) {
+        Booking booking = bookingService.updateBooking(Long.valueOf(id), updatedBooking);
+        return ResponseEntity.ok(booking);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBooking(@PathVariable String id) {
-        bookingService.deleteBooking(id);
+    public ResponseEntity<Void> deleteBooking(@PathVariable String id) {
+        bookingService.deleteBooking(Long.valueOf(id));
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
     public Booking getBookingById(@PathVariable String id) {
-        return bookingService.getBookingById(id);
+        return bookingService.getBookingById(Long.valueOf(id));
     }
 }

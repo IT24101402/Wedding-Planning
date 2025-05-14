@@ -5,7 +5,6 @@ import com.WeddingPlanning.Backend.Repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service
@@ -22,15 +21,19 @@ public class BookingService {
         bookingRepository.saveBooking(booking);
     }
 
-    public void updateBooking(String id, Booking booking) {
-        bookingRepository.updateBooking(id, booking);
+    public Booking updateBooking(Long id, Booking booking) {
+        String bookingId = String.valueOf(id); // convert Long to String
+        bookingRepository.updateBooking(bookingId, booking);
+        return booking;
     }
 
-    public void deleteBooking(String id) {
-        bookingRepository.deleteBooking(id);
+    public void deleteBooking(Long id) {
+        String bookingId = String.valueOf(id); // convert Long to String
+        bookingRepository.deleteBooking(bookingId);
     }
 
-    public Booking getBookingById(String id) {
-        return bookingRepository.findBookingById(id);
+    public Booking getBookingById(Long id) {
+        String bookingId = String.valueOf(id); // convert Long to String
+        return bookingRepository.findBookingById(bookingId);
     }
 }
