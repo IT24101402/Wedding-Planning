@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+   <style>
+       @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('/background_whole.jpg');
+            background-size: cover;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h2 {
+            color: #531753;
+            font-family: 'Dancing Script', cursive;
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        .login-box {
+            background-image: url('/background_part.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            width: 300px;
+            backdrop-filter: blur(4px);
+        }
+        input, button {
+            width: 100%;
+            padding: 6px;
+            margin-top: 6px;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #530853;
+            color: white;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Admin Login</h2>
+
+<div class="login-box">
+    <form action="/admin-login" method="post">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <div class="error">
+            <p th:text="${error}"></p>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
