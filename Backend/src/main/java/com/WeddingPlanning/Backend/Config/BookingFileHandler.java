@@ -9,13 +9,10 @@ public class BookingFileHandler {
 
     private static final String FILE_PATH = "bookings.txt";
 
-    public static List<Booking> getBookingsByUsername(String username) {
-        List<Booking> allBookings = readBookingsFromFile(); // reads from bookings.txt
-        return allBookings.stream()
-                .filter(b -> b.getUserName().equalsIgnoreCase(username))
-                .collect(Collectors.toList());
-    }
-
+    // v4 edit
+    //
+    //
+    
     public static List<Booking> readBookingsFromFile() {
         List<Booking> bookings = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
