@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings - Wedding Planner</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        /* If not already in your CSS file, you can include button styles here */
+
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .update-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Optional: Adjust to your table spacing if needed */
+        td button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>My Bookings</h1>
+
+    <label for="usernameInput">Enter your username:</label>
+    <input type="text" id="usernameInput">
+    <button onclick="loadBookings()">Show My Bookings</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Vendor</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="bookingBody">
+        <!-- Bookings will appear here -->
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+    function loadBookings() {
+        const userName = document.getElementById("usernameInput").value.trim();
+        const tbody = document.getElementById("bookingBody");
+        tbody.innerHTML = "";
+
+        if (!userName) {
+            alert("Please enter a username.");
+            return;
+        }
+
+        fetch(`http://localhost:8080/bookings/user/${userName}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok");
+                return response.json();
+            })
+            .then(bookings => {
+                if (bookings.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6">No bookings found for '${userName}'.</td></tr>`;
+                } else {
+                    bookings.forEach(b => {
+                        const row = document.createElement("tr");
+
+                        row.innerHTML = `
+                            <td>${b.bookingId}</td>
+                            <td>${b.vendorName}</td>
+                            <td>${b.serviceType}</td>
+                            <td>${b.bookingDate}</td>
+                            <td>${b.bookingTime}</td>
+                            <td>
+                                <button class="btn update-btn" onclick="updateBooking(${b.bookingId})">Update</button>
+                                <button class="btn delete-btn" onclick="deleteBooking(${b.bookingId})">Delete</button>
+                            </td>
+                        `;
+
+                        tbody.appendChild(row);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching bookings:", error);
+                tbody.innerHTML = `<tr><td colspan="6">Error loading bookings.</td></tr>`;
+            });
+    }
+
+    function updateBooking(bookingId) {
+        window.location.href = `booking.html?bookingId=${bookingId}`;
+    }
+
+    function deleteBooking(bookingId) {
+        if (confirm(`Are you sure you want to delete booking ${bookingId}?`)) {
+            fetch(`http://localhost:8080/bookings/${bookingId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.text())
+            .then(msg => {
+                alert(msg);
+                loadBookings(); // Refresh the list
+            })
+            .catch(err => {
+                console.error("Error deleting booking:", err);
+                alert("Error deleting booking.");
+            });
+        }
+    }
+</script>
+</body>
+</html>
