@@ -52,5 +52,26 @@
         <a href="login.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Logout</a>
     </p>
 </div>
+<script>
+    window.onload = async function() {
+      try {
+        const response = await fetch('users.txt');
+        const text = await response.text();
+        // Example CSV content: john_doe,john@example.com,1234567890,mySecretPass
+
+        const [username, email, password, phone ] = text.trim().split(',');
+
+        document.getElementById('username').value = username;
+        document.getElementById('email').value = email;
+        document.getElementById('phone').value = phone;
+        // For security reasons, you usually do not prefill password fields from files
+        // But if you want, uncomment the next line:
+        // document.getElementById('password').value = password;
+
+      } catch (error) {
+        console.error('Error loading profile data:', error);
+      }
+    };
+</script>
 </body>
 </html>

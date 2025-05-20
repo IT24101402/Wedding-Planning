@@ -51,31 +51,45 @@
 
 <script>
     document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+        e.preventDefault();
 
-      const data = {
-        username: document.getElementById("username").value,
-        password: document.getElementById("password").value
-      };
+        const input = {
+            username: document.getElementById("username").value.trim(),
+            password: document.getElementById("password").value.trim()
+        };
 
-      fetch("http://localhost:8080/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(res => {
-        if (!res.ok) throw new Error("Invalid login");
-        return res.json();
-      })
-      .then(user => {
-        alert("Login successful: Welcome " + user.username);
-        // Redirect or save user info here
-      })
-      .catch(err => {
-        alert("Login failed: " + err.message);
-      });
+        fetch("users.txt")
+            .then(response => {
+                if (!response.ok) throw new Error("Cannot load users.txt");
+                return response.text();
+            })
+            .then(data => {
+                const lines = data.trim().split('\n');
+                let loginSuccess = false;
+                let loggedInUsername = "";
+
+                for (const line of lines) {
+                    const [username, email, password, phone] = line.split(',');
+
+                    if ((input.username === username || input.username === email) &&
+                        input.password === password) {
+                        loginSuccess = true;
+                        loggedInUsername = username;
+                        break;
+                    }
+                }
+
+                if (loginSuccess) {
+
+                    localStorage.setItem("loggedInUser", loggedInUsername);
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("❌ Invalid username or password.");
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error.message);
+            });
     });
 </script>
 

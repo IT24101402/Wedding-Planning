@@ -10,7 +10,7 @@ import java.util.*;
 
 public class UserFileRepository implements UserRepository {
     private static final Logger logger = LoggerFactory.getLogger(UserFileRepository.class);
-    private static final String FILE_PATH = "users.txt"; // Looks in root project folder
+    private static final String FILE_PATH = "src/main/resources/static/users.txt"; // Looks in root project folder
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
