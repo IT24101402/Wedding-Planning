@@ -8,7 +8,7 @@ import java.util.*;
 
 @Repository
 public class BookingRepository {
-    private final String FILE_PATH = "bookings.txt";
+    private final String FILE_PATH = "src/main/resources/static/bookings.txt";
 
     public List<Booking> getAllBookings() {
         List<Booking> bookings = new ArrayList<>();

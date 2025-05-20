@@ -1,13 +1,13 @@
 package com.WeddingPlanning.Backend.Config;
 
 import com.WeddingPlanning.Backend.Model.Booking;
-import java.util.stream.Collectors;
+
 import java.io.*;
 import java.util.*;
 
 public class BookingFileHandler {
 
-    private static final String FILE_PATH = "bookings.txt";
+    private static final String FILE_PATH = "src/main/resources/static/bookings.txt";
 
     // v4 edit
     //

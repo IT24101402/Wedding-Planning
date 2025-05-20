@@ -10,8 +10,16 @@
     <h1>Book Your Wedding Service</h1>
     <form id="bookingForm">
         <input type="text" placeholder="Your Name" name="userName" required>
-        <input type="text" placeholder="Vendor Name" name="vendorName" required>
-        <input type="text" placeholder="Service Type" name="serviceType" required>
+
+        <!-- Changed to dropdowns -->
+        <select name="vendorName" id="vendorSelect" required>
+            <option value="">Select Vendor</option>
+        </select>
+
+        <select name="serviceType" id="serviceSelect" required>
+            <option value="">Select Service</option>
+        </select>
+
         <input type="date" name="bookingDate" required>
         <input type="time" name="bookingTime" required>
         <button type="submit">Book Now</button>
@@ -23,18 +31,55 @@
     const params = new URLSearchParams(window.location.search);
     const bookingId = params.get("bookingId");
 
+    // Load data from text file and populate dropdowns
+    async function loadDropdownData() {
+        const res = await fetch("vendors.txt");
+        const text = await res.text();
+        const lines = text.trim().split('\n');
+
+        const vendorSet = new Set();
+        const serviceSet = new Set();
+
+        lines.forEach(line => {
+            const parts = line.split(',');
+            if (parts.length >= 3) {
+                vendorSet.add(parts[1].trim());
+                serviceSet.add(parts[2].trim());
+            }
+        });
+
+        const vendorSelect = document.getElementById("vendorSelect");
+        const serviceSelect = document.getElementById("serviceSelect");
+
+        vendorSet.forEach(vendor => {
+            const opt = document.createElement("option");
+            opt.value = opt.textContent = vendor;
+            vendorSelect.appendChild(opt);
+        });
+
+        serviceSet.forEach(service => {
+            const opt = document.createElement("option");
+            opt.value = opt.textContent = service;
+            serviceSelect.appendChild(opt);
+        });
+    }
+
+    loadDropdownData();
+
+    // Pre-fill form if editing
     if (bookingId) {
         fetch(`http://localhost:8080/bookings/${bookingId}`)
             .then(res => res.json())
             .then(data => {
                 document.querySelector("input[name='userName']").value = data.userName;
-                document.querySelector("input[name='vendorName']").value = data.vendorName;
-                document.querySelector("input[name='serviceType']").value = data.serviceType;
+                document.getElementById("vendorSelect").value = data.vendorName;
+                document.getElementById("serviceSelect").value = data.serviceType;
                 document.querySelector("input[name='bookingDate']").value = data.bookingDate;
                 document.querySelector("input[name='bookingTime']").value = data.bookingTime;
             });
     }
 
+    // Submit logic
     document.getElementById('bookingForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target));
