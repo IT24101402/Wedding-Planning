@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>All Reviews</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+    body {
+      background-image: url('/background_whole.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: rgba(255,255,255,0.5);
+      background-blend-mode: lighten;
+      font-family: 'Poppins', sans-serif;
+    }
+    h2 {
+      text-align: center;
+      color: #531753;
+      font-family: 'Dancing Script', cursive;
+      font-size: 35px;
+      margin-top: 30px;
+    }
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background: rgb(46, 5, 46);
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+    th {
+      background-color: #d1a8d1;
+      color: #000;
+    }
+    td {
+      background-color: #ddc8dd;
+      border: 1px solid #bc80bc;
+      color: #000;
+    }
+    p {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    a {
+      color: #4a0d4a;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h2>All Reviews</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Vendor Name</th>
+    <th>Reviewer</th>
+    <th>Type</th>
+    <th>Rating</th>
+    <th>Review</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="review : ${reviews}">
+    <td th:text="${review.vendorName}"></td>
+    <td th:text="${review.reviewerName}"></td>
+    <td th:text="${review.type}"></td>
+    <td th:text="${review.rating}"></td>
+    <td th:text="${review.content}"></td>
+  </tr>
+  </tbody>
+</table>
+<p>
+  <a href="/">Submit Another Review</a> |
+  <a href="/admin">Admin Panel</a>
+</p>
+</body>
+</html>

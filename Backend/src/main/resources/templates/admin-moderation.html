@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <title>Admin Panel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+        body {
+            background-image: url('/background_whole.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(255,255,255,0.5);
+            background-blend-mode: lighten;
+            font-family: 'Poppins', sans-serif;
+        }
+        h2 {
+            text-align: center;
+            color: #531753;
+            font-family: 'Dancing Script', cursive;
+            font-size: 35px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgb(60, 19, 60);
+        }
+        th {
+            background-color: #d1a8d1;
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #bc80bc;
+        }
+        .verified {
+            background-color: #ddc8dd;
+            font-weight: bold;
+            color: #4c1f4c;
+        }
+        .guest {
+            background-color: #efe8ef;
+            font-style: italic;
+            color: #4c1f4c;
+        }
+        button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        p {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>Admin Moderation Panel</h2>
+<table>
+    <tr>
+        <th>Vendor Name</th>
+        <th>Reviewer</th>
+        <th>Type</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="review : ${reviews}"
+        th:classappend="${review.type.toLowerCase() == 'verified'} ? 'verified' : 'guest'">
+        <td th:text="${review.vendorName}"></td>
+        <td th:text="${review.reviewerName}"></td>
+        <td th:text="${review.type}"></td>
+        <td th:text="${review.rating}"></td>
+        <td th:text="${review.display()}"></td>
+        <td>
+            <form action="/delete" method="post">
+                <input type="hidden" name="id" th:value="${review.id}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<p style="text-align:center; margin-top: 20px;">
+    <a href="/" style="color:#4a0d4a;" >Submit New Review</a> |
+    <a href="/view" style="color:#4a0d4a;">View All Reviews</a>
+</p>
+</body>
+</html>

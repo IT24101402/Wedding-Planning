@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <title>Submit Review</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('/background_whole.jpg');
+      background-size: cover;
+      padding: 20px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      color: #531753;
+      font-family: 'Dancing Script', cursive;
+      font-size: 35px;
+    }
+    form {
+      background-image: url('/background_part.jpg');
+      background-size: cover;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #530853;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+    }
+    a {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<h2>Submit Your Review</h2>
+<form action="/submit" method="post">
+  <label>
+    <input type="text" name="vendorName" placeholder="Vendor Name" required>
+  </label>
+  <label>
+    <input type="text" name="reviewerName" placeholder="Your Name" required>
+  </label>
+  <label>
+    <textarea name="content" placeholder="Your review" required></textarea>
+  </label>
+  <label>
+    <input type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+  </label>
+  <label>
+    <select name="type">
+      <option value="verified">Verified</option>
+      <option value="guest">Guest</option>
+    </select>
+  </label>
+  <button type="submit">Submit</button>
+</form>
+<p style="text-align:center; margin-top: 20px;">
+  <a href="/view" style="color:#4a0d4a;" >View All Reviews</a>
+</p>
+</body>
+</html>
