@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <title>All Reviews</title>
   <style>
@@ -18,31 +18,47 @@
       color: #531753;
       font-family: 'Dancing Script', cursive;
       font-size: 35px;
+      margin-top: 30px;
     }
     table {
-      width: 100%;
+      width: 90%;
+      margin: 30px auto;
       border-collapse: collapse;
       background: rgb(46, 5, 46);
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
     }
     th {
       background-color: #d1a8d1;
       color: #000;
-      padding: 10px;
     }
     td {
       background-color: #ddc8dd;
-      padding: 10px;
       border: 1px solid #bc80bc;
+      color: #000;
     }
     p {
+      text-align: center;
+      margin-top: 20px;
       font-weight: bold;
     }
-
+    a {
+      color: #4a0d4a;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 <h2>All Reviews</h2>
 <table>
+  <thead>
   <tr>
     <th>Vendor Name</th>
     <th>Reviewer</th>
@@ -50,17 +66,20 @@
     <th>Rating</th>
     <th>Review</th>
   </tr>
+  </thead>
+  <tbody>
   <tr th:each="review : ${reviews}">
     <td th:text="${review.vendorName}"></td>
     <td th:text="${review.reviewerName}"></td>
     <td th:text="${review.type}"></td>
     <td th:text="${review.rating}"></td>
-    <td th:text="${review.display()}"></td>
+    <td th:text="${review.content}"></td>
   </tr>
+  </tbody>
 </table>
-<p style="text-align:center; margin-top: 20px;">
-  <a href="/" style="color:#4a0d4a;">Submit Another Review</a> |
-  <a href="/admin" style="color:#4a0d4a;">Admin Panel</a>
+<p>
+  <a href="/">Submit Another Review</a> |
+  <a href="/admin">Admin Panel</a>
 </p>
 </body>
 </html>
