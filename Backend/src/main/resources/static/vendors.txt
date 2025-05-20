@@ -1,2 +1,3 @@
 12,tharuka,photography,300000.0,0772262664
 123456,Kasun,Floral,34000.0,01123455677
+30,tharuka,photography,670000.0,23467834198,tharukadilum2@gmail.com,9000

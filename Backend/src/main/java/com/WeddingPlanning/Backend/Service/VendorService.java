@@ -17,9 +17,34 @@ public class VendorService {
     }
 
     public void addVendor(Vendor vendor) {
-        vendors.add(vendor);
-        repository.saveVendors(vendors);
+        System.out.println("➡️ Attempting to add vendor: " + vendor.getName() + " (ID: " + vendor.getId() + ")");
+
+        // Load latest vendor list from file
+        LinkedList<Vendor> currentVendors = repository.loadVendors();
+
+        // Check for duplicate ID or email
+        for (Vendor v : currentVendors) {
+            if (v.getId().equals(vendor.getId())) {
+                System.out.println("⚠️ Vendor with ID " + vendor.getId() + " already exists!");
+                return; // Skip adding
+            }
+            if (v.getEmail().equalsIgnoreCase(vendor.getEmail())) {
+                System.out.println("⚠️ Vendor with Email " + vendor.getEmail() + " already exists!");
+                return; // Skip adding
+            }
+        }
+
+        // Add new vendor
+        currentVendors.add(vendor);
+        this.vendors = currentVendors; // Update in-memory list
+
+        System.out.println("✅ Vendor added. Total vendors now: " + currentVendors.size());
+
+        // Save updated list
+        repository.saveVendors(currentVendors);
+        System.out.println("💾 Vendor list saved to file.");
     }
+
 
     public List<Vendor> getAllVendors() {
         return vendors;
@@ -28,6 +53,18 @@ public class VendorService {
     public Vendor getVendorById(Long id) {
         for (Vendor v : vendors) {
             if (v.getId().equals(id)) return v;
+        }
+        return null;
+    }
+    public Vendor getVendorByEmail(String email) {
+        for (Vendor v : vendors) {
+            if (v.getEmail().equals(email)) return v;
+        }
+        return null;
+    }
+    public Vendor vendorLogin(String email, String password){
+        for (Vendor v : vendors) {
+            if (v.getEmail().equals(email)&& v.getPassword().equals(password)) return v;
         }
         return null;
     }

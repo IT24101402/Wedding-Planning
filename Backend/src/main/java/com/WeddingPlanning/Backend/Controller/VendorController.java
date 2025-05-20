@@ -2,6 +2,7 @@ package com.WeddingPlanning.Backend.Controller;
 
 import com.WeddingPlanning.Backend.Model.Vendor;
 import com.WeddingPlanning.Backend.Service.VendorService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +22,14 @@ public class VendorController {
 
     @GetMapping("/vendors/register")
     public String showForm(Model model) {
-        model.addAttribute("vendor", new Vendor(0L, "", "", 0.0, ""));
+        model.addAttribute("vendor", new Vendor(0L, "", "", 0.0, "","",""));
         return "register";
     }
 
     @PostMapping("/vendors/save")
     public String save(@ModelAttribute Vendor vendor) {
         service.addVendor(vendor);
-        return "redirect:/vendors";
+        return "redirect:/login";
     }
 
     @GetMapping("/vendors/edit/{id}")
@@ -54,4 +55,34 @@ public class VendorController {
         model.addAttribute("vendor", service.getVendorById(id));
         return "profile";
     }
+
+    @PostMapping("/vendor/login")
+    public String vendorLogin(@RequestParam String email, @RequestParam String password,
+                              HttpSession session, Model model) {
+        Vendor loggedVendor = service.vendorLogin(email, password);
+        if (loggedVendor != null) {
+            session.setAttribute("loggedVendor", loggedVendor);
+            model.addAttribute("vendor", loggedVendor);
+            return "profile";
+        } else {
+            model.addAttribute("error", "Invalid credentials");
+            return "login";
+        }
+    }
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; // This will render login.html from templates
+    }
+    @GetMapping("/vendor/profile")
+    public String vendorProfile(HttpSession session, Model model) {
+        Vendor vendor = (Vendor) session.getAttribute("loggedVendor");
+        if (vendor != null) {
+            model.addAttribute("vendor", vendor);
+            return "profile";
+        } else {
+            return "redirect:/login";
+        }
+    }
+
+
 }
