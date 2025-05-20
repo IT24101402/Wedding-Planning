@@ -28,13 +28,15 @@ public class VendorRepository {
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length >= 5) {
+                if (parts.length >= 7) {
                     Vendor v = new Vendor(
                             Long.parseLong(parts[0]),
                             parts[1],
                             parts[2],
                             Double.parseDouble(parts[3]),
-                            parts[4]
+                            parts[4],
+                            parts[5],
+                            parts[6]
                     );
                     list.add(v);
                 }
