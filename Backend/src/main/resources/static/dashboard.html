@@ -21,7 +21,7 @@
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     padding: 40px 30px 30px 30px;
 ">
-    <h1 style="text-align: center; color: #2d3e50; margin-bottom: 36px;">Welcome, John!</h1>
+    <h1 style="text-align: center; color: #2d3e50; margin-bottom: 36px;">Welcome, Guest!</h1>
     <div class="card-grid" style="
         display: flex;
         gap: 32px;
@@ -114,5 +114,14 @@
         </div>
     </div>
 </div>
+
+<!-- Dynamic Welcome Message Script -->
+<script>
+    const username = localStorage.getItem("loggedInUser");
+    if (username) {
+        document.querySelector("h1").textContent = "Welcome, " + username + "!";
+    }
+</script>
+
 </body>
 </html>
