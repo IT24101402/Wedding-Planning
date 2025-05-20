@@ -10,10 +10,10 @@ import java.util.LinkedList;
 public class VendorRepository {
 
     // File to save data - outside resources so we can write to it
-    private final String saveFilePath = "Backend/vendors.txt";
+    private final String saveFilePath = "src/main/resources/static/vendors.txt";
 
     // File to load from - inside resources
-    private final String resourceFileName = "vendors.txt";
+    private final String resourceFileName = "static/vendors.txt";
 
     public LinkedList<Vendor> loadVendors() {
         LinkedList<Vendor> list = new LinkedList<>();
