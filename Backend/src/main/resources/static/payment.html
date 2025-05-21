@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href = "payment.css">
+    <title>Payment</title>
+</head>
+<body>
+<h1>Payment Page</h1>
+<button onclick="pay()">Pay Now</button>
+<script>
+    async function pay() {
+        await fetch('http://localhost:8080/billing/pay', { method: 'POST' });
+        alert("Payment Success!");
+    }
+</script>
+</body>
+</html>

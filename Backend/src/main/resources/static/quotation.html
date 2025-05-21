@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href = "quotation.css">
+    <title>Quotation Page</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .booking { margin-bottom: 10px; }
+        button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+<h1>Quotation</h1>
+<div id="bookingList"></div>
+<button onclick="finalize()">Finalize Quotation</button>
+<script>
+    async function loadQuotation() {
+        const res = await fetch('http://localhost:8080/billing/quotation');
+        const data = await res.json();
+        let html = '';
+        data.bookings.forEach((b, i) => {
+            html += `<div class="booking">
+                    ${b.serviceType} - ${b.price}
+                    <button onclick="removeBooking(${i})">Delete</button>
+                </div>`;
+        });
+        html += `<p><strong>Total:</strong> ${data.total}</p>`;
+        document.getElementById('bookingList').innerHTML = html;
+    }
+
+    async function removeBooking(index) {
+        await fetch(`http://localhost:8080/billing/removeBooking/${index}`, { method: 'DELETE' });
+        loadQuotation();
+    }
+
+    async function finalize() {
+        await fetch('http://localhost:8080/billing/finalize', { method: 'POST' });
+        alert('Quotation finalized.');
+    }
+
+    loadQuotation();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel = "stylesheet" href = "finalBill.css">
+    <title>Final Bill</title>
+</head>
+<body>
+<h1>Final Bill</h1>
+<div id="bill"></div>
+<script>
+    async function loadBill() {
+        const res = await fetch('http://localhost:8080/billing/quotation');
+        const data = await res.json();
+        let html = '<ul>';
+        data.bookings.forEach(b => {
+            html += `<li>${b.serviceType} - ${b.price}</li>`;
+        });
+        html += `</ul><p>Total: ${data.total}</p>
+                     <p>Finalized: ${data.finalized}</p>
+                     <p>Paid: ${data.paid}</p>`;
+        document.getElementById('bill').innerHTML = html;
+    }
+
+    loadBill();
+</script>
+</body>
+</html>
