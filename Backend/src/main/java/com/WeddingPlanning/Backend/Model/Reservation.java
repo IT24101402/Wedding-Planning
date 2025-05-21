@@ -1,10 +1,10 @@
 package com.WeddingPlanning.Backend.Model;
 
-public class Booking {
+public class Reservation {
     private String serviceType;
     private double price;
 
-    public Booking(String serviceType, double price) {
+    public Reservation(String serviceType, double price) {
         this.serviceType = serviceType;
         this.price = price;
     }

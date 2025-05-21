@@ -1,7 +1,7 @@
 package com.WeddingPlanning.Backend.Service;
 
 import com.WeddingPlanning.Backend.Model.Bill;
-import com.WeddingPlanning.Backend.Model.BookingModel;
+import com.WeddingPlanning.Backend.Model.Reservation;
 import com.WeddingPlanning.Backend.Repository.BillingRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class BillingService {
         this.repository = repository;
     }
 
-    public void addBooking(BookingModel booking) {
+    public void addBooking(Reservation booking) {
         currentBill.addBooking(booking);
     }
 

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Quotation {
-    private List<BookingModel> bookings = new ArrayList<>();
+    private List<Reservation> bookings = new ArrayList<>();
     private double total;
 
-    public void addBooking(BookingModel booking) {
+    public void addBooking(Reservation booking) {
         bookings.add(booking);
         calculateTotal();
     }
@@ -19,12 +19,12 @@ public class Quotation {
 
     public void calculateTotal() {
         total = 0;
-        for (BookingModel b : bookings) {
+        for (Reservation b : bookings) {
             total += b.getPrice();
         }
     }
 
-    public List<BookingModel> getBookings() {
+    public List<Reservation> getBookings() {
         return bookings;
     }
 

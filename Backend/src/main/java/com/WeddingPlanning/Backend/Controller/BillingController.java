@@ -2,7 +2,7 @@ package com.WeddingPlanning.Backend.Controller;
 
 
 import com.WeddingPlanning.Backend.Model.Bill;
-import com.WeddingPlanning.Backend.Model.BookingModel;
+import com.WeddingPlanning.Backend.Model.Reservation;
 import com.WeddingPlanning.Backend.Service.BillingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class BillingController {
     }
 
     @PostMapping("/addBooking")
-    public void addBooking(@RequestBody BookingModel booking) {
+    public void addBooking(@RequestBody Reservation booking) {
         service.addBooking(booking);
     }
 
