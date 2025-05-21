@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -46,18 +47,38 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
-            User loggedInUser = userService.login(user.getUsername(), user.getPassword());
+            Path filePath = Paths.get("src/main/resources/static/users.txt");
 
-            if (loggedInUser != null) {
-                return ResponseEntity.ok(loggedInUser);
-            } else {
+            if (!Files.exists(filePath)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(Collections.singletonMap("error", "Invalid credentials"));
+                        .body(Collections.singletonMap("error", "User file not found"));
             }
 
-        } catch (Exception e) {
+            List<String> lines = Files.readAllLines(filePath);
+            for (String line : lines) {
+                String[] parts = line.split(",");
+                if (parts.length != 4) continue;
+
+                String fileUsername = parts[0].trim();
+                String fileEmail = parts[1].trim();
+                String filePassword = parts[2].trim();
+                String filePhone = parts[3].trim();
+
+                boolean matchesUsernameOrEmail = user.getUsername().equals(fileUsername) || user.getUsername().equals(fileEmail);
+                boolean matchesPassword = user.getPassword().equals(filePassword);
+
+                if (matchesUsernameOrEmail && matchesPassword) {
+                    User matchedUser = new User(null, fileUsername, fileEmail, filePassword, filePhone);
+                    return ResponseEntity.ok(matchedUser);
+                }
+            }
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("error", "Invalid username or password"));
+
+        } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Collections.singletonMap("error", e.getMessage()));
+                    .body(Collections.singletonMap("error", "Login failed: " + e.getMessage()));
         }
     }
 
