@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forever & Always Wedding Planning</title>
+  <style>
+    /* General reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      width: 100%;
+      background: linear-gradient(to bottom right, #FFF1F2, #F3E8FF);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 32px;
+      }
+    }
+
+    /* Background decorative elements */
+    .background-decor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      opacity: 0.1;
+    }
+
+    .heart-1 {
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      color: #F9A8D4;
+      transform: rotate(-12deg);
+      font-size: 120px;
+    }
+
+    .heart-2 {
+      position: absolute;
+      top: 33%;
+      right: 25%;
+      color: #C4B5FD;
+      transform: rotate(12deg);
+      font-size: 80px;
+    }
+
+    .heart-3 {
+      position: absolute;
+      bottom: 25%;
+      left: 33%;
+      color: #F9A8D4;
+      transform: rotate(45deg);
+      font-size: 100px;
+    }
+
+    /* Main content */
+    .main-content {
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #8B5CF6, #F472B6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .header h1 {
+        font-size: 2.25rem;
+      }
+    }
+
+    .header p {
+      font-size: 1.125rem;
+      color: #6B7280;
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .card-container {
+        flex-direction: row;
+      }
+    }
+
+    /* Card styles */
+    .card {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      padding: 32px;
+      width: 100%;
+      max-width: 384px;
+      border: 1px solid;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .user-card {
+      border-color: #FEE2E2;
+    }
+
+    .vendor-card {
+      border-color: #EDE9FE;
+    }
+
+    .card-content {
+      text-align: center;
+    }
+
+    .icon-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 9999px;
+      margin-bottom: 24px;
+    }
+
+    .user-card .icon-container {
+      background: #FFF1F2;
+      color: #EC4899;
+    }
+
+    .vendor-card .icon-container {
+      background: #F5F3FF;
+      color: #8B5CF6;
+    }
+
+    .icon-container span {
+      font-size: 40px;
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1F2937;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #6B7280;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #6B7280;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+<!-- Background decorative elements -->
+<div class="background-decor">
+  <div class="heart-1">♥</div>
+  <div class="heart-2">♥</div>
+  <div class="heart-3">♥</div>
+</div>
+<!-- Main content -->
+<div class="main-content">
+  <div class="header">
+    <h1>EverAfter</h1>
+    <p>Wedding Planning Platform</p>
+  </div>
+  <div class="card-container">
+    <!-- User Login Card -->
+    <div class="card user-card">
+      <div class="card-content">
+        <div class="icon-container">
+          <span>User</span>
+        </div>
+        <h2>User Login</h2>
+        <p>Plan your perfect day and create memories that last forever</p>
+      </div>
+    </div>
+    <!-- Vendor Login Card -->
+    <div class="card vendor-card">
+      <div class="card-content">
+        <div class="icon-container">
+          <span>Vendor</span>
+        </div>
+        <h2>Vendor Login</h2>
+        <p>Showcase your services and help create dream weddings</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    © 2023 Forever & Always Wedding Planning | All Rights Reserved
+  </div>
+</div>
+</body>
+</html>
