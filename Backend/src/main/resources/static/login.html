@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Wedding Planner</title>
+</head>
+<body style="margin:0; padding:0; background: #f7f7f7; font-family: Arial, Helvetica, sans-serif;">
+<div class="login-container" style="
+    max-width: 350px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 32px 28px 22px 28px;
+    text-align: center;
+">
+    <h2 style="margin-bottom: 28px; color: #2d3e50;">Login</h2>
+    <form id="loginForm" style="display: flex; flex-direction: column; gap: 16px;">
+        <label for="username" style="text-align: left; color: #444; font-weight: 500;">Username or Email</label>
+        <input type="text" id="username" name="username" required
+               style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; font-size: 15px;">
+
+        <label for="password" style="text-align: left; color: #444; font-weight: 500;">Password</label>
+        <input type="password" id="password" name="password" required
+               style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; font-size: 15px;">
+
+        <button type="submit" style="
+            margin-top: 10px;
+            padding: 10px 0;
+            background: #315fa7;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        "
+                onmouseover="this.style.background='#23416b';"
+                onmouseout="this.style.background='#315fa7';"
+        >Login</button>
+    </form>
+    <p style="margin-top: 20px; color: #666; font-size: 15px;">
+        Don't have an account?
+        <a href="register.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Register here</a>
+    </p>
+    <p style="margin-top: 10px; color: #666; font-size: 15px;">
+        <a href="dashboard.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Back to Dashboard</a>
+    </p>
+</div>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const input = {
+            username: document.getElementById("username").value.trim(),
+            password: document.getElementById("password").value.trim()
+        };
+
+        fetch("http://localhost:8080/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(input)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.error || "Login failed");
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Store user info locally if needed
+            localStorage.setItem("loggedInUser", data.username);
+            alert("✅ Login successful!");
+            window.location.href = "dashboard.html";
+        })
+        .catch(error => {
+            alert("❌ " + error.message);
+        });
+    });
+</script>
+
+</body>
+</html>

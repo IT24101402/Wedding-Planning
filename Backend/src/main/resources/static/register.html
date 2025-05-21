@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Management</title>
+</head>
+<body style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+">
+
+<div class="container" style="
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+">
+  <h2 style="color: #343a40; margin-bottom: 20px;">Register</h2>
+  <form id="registerForm" style="display: flex; flex-direction: column;">
+    <input type="text" id="username" placeholder="Username" required
+           style="width:100%; padding:12px 15px; margin:10px 0; border:1px solid #ced4da; border-radius:8px; box-sizing:border-box; transition:border-color 0.3s ease; font-size:15px;">
+    <input type="text" id="email" placeholder="Email" required
+           style="width:100%; padding:12px 15px; margin:10px 0; border:1px solid #ced4da; border-radius:8px; box-sizing:border-box; transition:border-color 0.3s ease; font-size:15px;">
+    <input type="text" id="phone" placeholder="Phone"
+           style="width:100%; padding:12px 15px; margin:10px 0; border:1px solid #ced4da; border-radius:8px; box-sizing:border-box; transition:border-color 0.3s ease; font-size:15px;">
+    <input type="password" id="password" placeholder="Password" required
+           style="width:100%; padding:12px 15px; margin:10px 0; border:1px solid #ced4da; border-radius:8px; box-sizing:border-box; transition:border-color 0.3s ease; font-size:15px;">
+    <button type="submit"
+            style="background-color:#007bff; color:white; padding:12px; width:100%; border:none; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:15px; font-size:16px; transition:background-color 0.3s ease;"
+            onmouseover="this.style.backgroundColor='#0056b3';"
+            onmouseout="this.style.backgroundColor='#007bff';"
+    >Register</button>
+  </form>
+  <div class="message" id="message" style="margin-top:15px; font-size:14px; color:green;"></div>
+  <p style="margin-top: 20px; color: #666; font-size: 15px;">
+    Already have an account?
+    <a href="login.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Login here</a>
+  </p>
+  <p style="margin-top: 10px; color: #666; font-size: 15px;">
+    <a href="dashboard.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Back to Dashboard</a>
+  </p>
+</div>
+
+<script>
+  document.getElementById("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const data = {
+      username: document.getElementById("username").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      password: document.getElementById("password").value
+    };
+
+    fetch("http://localhost:8080/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(msg => {
+      document.getElementById("message").textContent = msg;
+      setTimeout(() => { document.getElementById("message").textContent = ""; }, 5000);
+    })
+    .catch(error => {
+      document.getElementById("message").textContent = "Registration failed: " + error;
+      document.getElementById("message").style.color = "red";
+      setTimeout(() => { document.getElementById("message").textContent = ""; document.getElementById("message").style.color = "green"; }, 5000);
+    });
+  });
+</script>
+
+</body>
+</html>
