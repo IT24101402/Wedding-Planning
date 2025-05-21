@@ -1,7 +1,7 @@
 package com.WeddingPlanning.Backend.Repository;
 
 import com.WeddingPlanning.Backend.Model.Bill;
-import com.WeddingPlanning.Backend.Model.Booking;
+import com.WeddingPlanning.Backend.Model.BookingModel;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
@@ -16,7 +16,7 @@ public class BillingRepository {
     public void saveBill(Bill bill) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH, true))) {
             writer.println("Bill:");
-            for (Booking booking : bill.getBookings()) {
+            for (BookingModel booking : bill.getBookings()) {
                 writer.println(booking.getServiceType() + "," + booking.getPrice());
             }
             writer.println("Total: " + bill.getTotal());
