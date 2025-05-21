@@ -4,72 +4,87 @@
   <meta charset="UTF-8">
   <title>Vendor Profile</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ffe6f0, #f0f9ff);
-      background-image: url('/images/background.jpg'); /* place your image inside src/main/resources/static/images/ */
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom right, rgba(34, 34, 34, 0.8), rgba(0, 0, 0, 0.7)),
+                  url('https://images.unsplash.com/photo-1519306943444-3e1588e3fd23?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D');
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
     }
 
     .profile-card {
-      background-color: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      width: 400px;
-      text-align: left;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 50px 40px;
+      width: 480px;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: #ffd1dc;
       text-align: center;
-      color: #c94f7c;
       margin-bottom: 30px;
     }
 
     p {
       font-size: 16px;
-      margin-bottom: 15px;
-      color: #333;
+      margin-bottom: 18px;
+      line-height: 1.6;
     }
 
     strong {
-      color: #c94f7c;
-    }
-
-    a.button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #c94f7c;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 14px;
-      margin: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    a.button:hover {
-      background-color: #b83c6b;
-    }
-
-    .button.secondary {
-      background-color: #6c757d;
-    }
-
-    .button.secondary:hover {
-      background-color: #5a6268;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #ffccd5;
     }
 
     .actions {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 12px 26px;
+      background-color: #ff6f91;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 15px;
+      margin: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    a.button:hover {
+      background-color: #e85a78;
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      background-color: #555;
+    }
+
+    .button.secondary:hover {
+      background-color: #333;
     }
   </style>
 </head>
