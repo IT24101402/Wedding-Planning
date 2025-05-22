@@ -184,7 +184,7 @@
 
 <script>
   window.onload = function () {
-    const storedUsername = sessionStorage.getItem("username");
+    const storedUsername = sessionStorage.getItem("loggedInUser");
     if (storedUsername) {
       loadBookings(storedUsername);
     } else {
