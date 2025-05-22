@@ -7,6 +7,9 @@ import com.WeddingPlanning.Backend.Service.BillingService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/billing")
@@ -48,4 +51,28 @@ public class BillingController {
     public List<String> getAllBills() {
         return service.getAllBills();
     }
+
+    @PostMapping("/importBookings")
+    public void importBookings() {
+        service.importBookingsFromFiles("src/main/resources/static/bookings.txt", "src/main/resources/static/vendors.txt");
+    }
+
+    @GetMapping("/quotationByUser")
+    public Map<String, Object> getQuotation(@RequestParam String username) {
+        List<Reservation> allBookings = service.readFromReservationTxt(); // your logic in service
+        List<Reservation> userBookings = allBookings.stream()
+                .filter(b -> b.getCustomerName().equalsIgnoreCase(username))
+                .collect(Collectors.toList());
+
+        double total = userBookings.stream()
+                .mapToDouble(Reservation::getPrice)
+                .sum();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("bookings", userBookings);
+        response.put("total", total);
+        return response;
+    }
+
+
 }
