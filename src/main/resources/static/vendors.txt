@@ -4,4 +4,4 @@
 67,Test3,test3,2500000.0,08722345,uiopie24@gmail.com,123456
 78,Test4,test4,780000.0,0112346654,ueyreuy@gmail.com,12345
 123456789,Test6,test,654000.0,07646452434,qwer@mail.com,123456
-24101356,Senuda,photography,75000.0,077226345,senuda@gmail.com,senu
+678,pulitha,flower,350000.0,0112908325,pulitha@gmail.com,pulitha123
