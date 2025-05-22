@@ -98,20 +98,23 @@ public class UserFileRepository implements UserRepository {
     }
 
     private String serialize(User user) {
-        try {
-            return objectMapper.writeValueAsString(user);
-        } catch (IOException e) {
-            logger.error("Serialization failed", e);
-            return "";
-        }
+        // Converts user to CSV format
+        return String.join(",",
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getPhone());
     }
 
     private User deserialize(String line) {
-        try {
-            return objectMapper.readValue(line, User.class);
-        } catch (IOException e) {
-            logger.error("Deserialization failed", e);
+        // Parses CSV line into User object
+        String[] parts = line.split(",");
+        if (parts.length == 4) {
+            return new User(parts[0], parts[1], parts[2], parts[3]);
+        } else {
+            logger.error("Invalid line format: {}", line);
             return null;
         }
+
     }
 }

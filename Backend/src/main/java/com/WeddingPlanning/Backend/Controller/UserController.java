@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -47,8 +46,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
-            Path filePath = Paths.get("src/main/resources/static/users.txt");
-
             if (!Files.exists(filePath)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(Collections.singletonMap("error", "User file not found"));
@@ -68,7 +65,7 @@ public class UserController {
                 boolean matchesPassword = user.getPassword().equals(filePassword);
 
                 if (matchesUsernameOrEmail && matchesPassword) {
-                    User matchedUser = new User(null, fileUsername, fileEmail, filePassword, filePhone);
+                    User matchedUser = new User(fileUsername, fileEmail, filePassword, filePhone);
                     return ResponseEntity.ok(matchedUser);
                 }
             }
@@ -84,13 +81,81 @@ public class UserController {
 
     // ✅ UPDATE
     @PutMapping("/update")
-    public boolean update(@RequestBody User user) {
-        return userService.updateUser(user);
+    public ResponseEntity<String> update(@RequestBody User updatedUser) {
+        try {
+            if (!Files.exists(filePath)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("User file not found.");
+            }
+
+            List<String> lines = Files.readAllLines(filePath);
+            boolean userFound = false;
+
+            for (int i = 0; i < lines.size(); i++) {
+                String[] parts = lines.get(i).split(",");
+                if (parts.length != 4) continue;
+
+                String username = parts[0].trim();
+                if (username.equals(updatedUser.getUsername())) {
+                    lines.set(i, String.join(",",
+                            updatedUser.getUsername().trim(),
+                            updatedUser.getEmail().trim(),
+                            updatedUser.getPassword().trim(),
+                            updatedUser.getPhone().trim()
+                    ));
+                    userFound = true;
+                    break;
+                }
+            }
+
+            if (userFound) {
+                Files.write(filePath, lines, StandardOpenOption.TRUNCATE_EXISTING);
+                return ResponseEntity.ok("User profile updated successfully.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("User not found.");
+            }
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error updating user profile: " + e.getMessage());
+        }
     }
 
     // ✅ DELETE
     @DeleteMapping("/{username}")
     public boolean delete(@PathVariable String username) {
         return userService.deleteUser(username);
+    }
+
+    // ✅ GET PROFILE
+    @GetMapping("/user/profile")
+    public ResponseEntity<User> getUserProfile(@RequestParam String username) {
+        try {
+            if (!Files.exists(filePath)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            List<String> lines = Files.readAllLines(filePath);
+            for (String line : lines) {
+                String[] parts = line.split(",");
+                if (parts.length != 4) continue;
+
+                String fileUsername = parts[0].trim();
+                String fileEmail = parts[1].trim();
+                String filePassword = parts[2].trim();
+                String filePhone = parts[3].trim();
+
+                if (fileUsername.equals(username.trim())) {
+                    User user = new User(fileUsername, fileEmail, filePassword, filePhone);
+                    return ResponseEntity.ok(user);
+                }
+            }
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

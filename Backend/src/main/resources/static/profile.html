@@ -5,73 +5,101 @@
     <title>Profile - Wedding Planner</title>
 </head>
 <body style="margin:0; padding:0; background: #f7f7f7; font-family: Arial, Helvetica, sans-serif;">
-<div class="profile-container" style="
-    max-width: 400px;
-    margin: 60px auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    padding: 36px 30px 24px 30px;
-">
+<div class="profile-container" style="max-width: 400px; margin: 60px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); padding: 36px 30px 24px 30px;">
     <h2 style="text-align: center; color: #2d3e50; margin-bottom: 28px;">Update Profile</h2>
-    <form action="UpdateProfileServlet" method="post" style="display: flex; flex-direction: column; gap: 15px;">
-        <label for="username" style="color: #444; font-weight: 500; margin-bottom: 2px;">Username</label>
-        <input type="text" id="username" name="username" value="john_doe" readonly
-               style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; font-size: 15px; background: #f1f1f1; color: #888;">
+    <form id="updateForm" style="display: flex; flex-direction: column; gap: 15px;">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" readonly style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; background: #f1f1f1; color: #888;">
 
-        <label for="email" style="color: #444; font-weight: 500; margin-bottom: 2px;">Email</label>
-        <input type="email" id="email" name="email" value="john@example.com" required
-               style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; font-size: 15px;">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
 
-        <label for="phone" style="color: #444; font-weight: 500; margin-bottom: 2px;">Phone</label>
-        <input type="text" id="phone" name="phone" value="1234567890" required
-               style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; font-size: 15px;">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" required>
 
-        <label for="password" style="color: #444; font-weight: 500; margin-bottom: 2px;">New Password</label>
-        <input type="password" id="password" name="password"
-               style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; font-size: 15px;">
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="password">
 
-        <button type="submit" style="
-            margin-top: 12px;
-            padding: 10px 0;
-            background: #315fa7;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        "
-                onmouseover="this.style.background='#23416b';"
-                onmouseout="this.style.background='#315fa7';"
-        >Save Changes</button>
+        <button type="submit" style="margin-top: 12px; padding: 10px 0; background: #315fa7; color: #fff; border: none; border-radius: 5px; font-size: 16px;">Save Changes</button>
     </form>
-    <p style="margin-top: 20px; color: #666; font-size: 15px;">
-        <a href="dashboard.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Back to Dashboard</a> |
-        <a href="login.html" style="color: #315fa7; text-decoration: none; font-weight: 500;">Logout</a>
+    <p style="margin-top: 20px;">
+        <a href="dashboard.html">Back to Dashboard</a> |
+        <a href="login.html">Logout</a>
     </p>
 </div>
+
 <script>
-    window.onload = async function() {
-      try {
-        const response = await fetch('users.txt');
-        const text = await response.text();
-        // Example CSV content: john_doe,john@example.com,1234567890,mySecretPass
+    window.onload = async function () {
+        const loggedInUser = sessionStorage.getItem("loggedInUser");
+        console.log("[LOG] Session loggedInUser: ", loggedInUser);
 
-        const [username, email, password, phone ] = text.trim().split(',');
+        if (!loggedInUser) {
+            alert("You are not logged in.");
+            window.location.href = "login.html";
+            return;
+        }
 
-        document.getElementById('username').value = username;
-        document.getElementById('email').value = email;
-        document.getElementById('phone').value = phone;
-        // For security reasons, you usually do not prefill password fields from files
-        // But if you want, uncomment the next line:
-        // document.getElementById('password').value = password;
+        try {
+            const url = "http://localhost:8080/api/users/user/profile?username=" + encodeURIComponent(loggedInUser);
+            console.log("[LOG] Fetching user profile from: ", url);
 
-      } catch (error) {
-        console.error('Error loading profile data:', error);
-      }
+            const res = await fetch(url);
+            console.log("[LOG] Response status: ", res.status);
+
+            if (!res.ok) throw new Error("User not found or server error");
+
+            const data = await res.json();
+            console.log("[LOG] User data received: ", data);
+
+            document.getElementById("username").value = data.username;
+            document.getElementById("email").value = data.email;
+            document.getElementById("phone").value = data.phone;
+            document.getElementById("password").value = data.password;
+
+        } catch (err) {
+            console.error("[ERROR] Failed to load profile data: ", err);
+            alert("❌ Could not load user profile.");
+        }
     };
+
+    document.getElementById("updateForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const updatedUser = {
+            username: document.getElementById("username").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            password: document.getElementById("password").value.trim()
+        };
+
+        console.log("[LOG] Sending updated user data: ", updatedUser);
+
+        try {
+            const res = await fetch("http://localhost:8080/api/users/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedUser)
+            });
+
+            const message = await res.text();
+            console.log("[LOG] Update response status: ", res.status);
+            console.log("[LOG] Update response message: ", message);
+
+            if (res.ok) {
+                alert("✅ " + message);
+                sessionStorage.setItem("loggedInUser", updatedUser.username);
+                window.location.href = "dashboard.html";
+            } else {
+                alert("❌ " + message);
+            }
+
+        } catch (err) {
+            console.error("[ERROR] Failed to update profile: ", err);
+            alert("❌ Failed to update profile.");
+        }
+    });
 </script>
 </body>
 </html>
