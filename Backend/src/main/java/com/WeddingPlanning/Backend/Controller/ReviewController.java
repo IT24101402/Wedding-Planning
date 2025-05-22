@@ -24,7 +24,7 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @GetMapping("/review-form")
+    @GetMapping("/submit-review")
     public String showSubmitForm() {
         return "submit-review";
     }
