@@ -4,4 +4,4 @@
 67,Test3,test3,2500000.0,08722345,uiopie24@gmail.com,123456
 78,Test4,test4,780000.0,0112346654,ueyreuy@gmail.com,12345
 123456789,Test6,test,654000.0,07646452434,qwer@mail.com,123456
-24101789,ilma,photography ,50000.0,0772262664,ilma@gmail.com,9999
+24101789,Ruuth,photography ,89000.0,0112908325,ruuth@gmail.com,7890
