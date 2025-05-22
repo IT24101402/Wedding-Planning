@@ -4,3 +4,19 @@ Total: 670000.0
 Finalized: false
 Paid: false
 ---
+Bill:
+Total: 0.0
+Finalized: false
+Paid: true
+---
+Bill:
+Wedding Dress,85000.0
+Banquet Hall,250000.0
+Floral Decorations,45000.0
+Music Instruments,60000.0
+Food Catering,120000.0
+Liqour,95000.0
+Total: 655000.0
+Finalized: false
+Paid: false
+---

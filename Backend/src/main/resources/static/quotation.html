@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel = "stylesheet" href = "quotation.css">
+    <meta charset="UTF-8">
     <title>Quotation Page</title>
-    <style>
-        body { font-family: Arial; padding: 20px; }
-        .booking { margin-bottom: 10px; }
-        button { margin-top: 10px; }
-    </style>
+    <link rel="stylesheet" href="quotation.css">
 </head>
 <body>
-<h1>Quotation</h1>
-<div id="bookingList"></div>
-<button onclick="finalize()">Finalize Quotation</button>
+<h1>Quotation Page</h1>
+<div class="card">
+    <table>
+        <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>User</th>
+            <th>Service</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr><td>001</td><td>Kasun</td><td>Wedding Dress</td><td>$100</td><td><button>Edit</button> <button>Delete</button></td></tr>
+        <tr><td>002</td><td>Ilma</td><td>Banquet Hall</td><td>$200</td><td><button>Edit</button> <button>Delete</button></td></tr>
+        </tbody>
+    </table>
+    <div class="total">Total: $300</div>
+</div>
+<button class="finalize-btn">Finalize Quotation</button>
 <script>
     async function loadQuotation() {
-        const username = localStorage.getItem('username'); // 👈 get logged in user
-        const res = await fetch(http://localhost:8080/billing/quotation?username=${username});
+        const username = localStorage.getItem('loggedInUser'); // 👈 get logged in user
+        const res = await fetch(`http://localhost:8080/billing/quotation?username=${username}`);
         const data = await res.json();
         let html = '';
         data.bookings.forEach((b, i) => {

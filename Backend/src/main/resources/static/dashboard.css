@@ -49,115 +49,125 @@ body::before {
 
 .container {
   position: relative;
-    background: url('wedding-bg-overlay.jpg') no-repeat center center;
-    background-size: cover;
+  background: url('wedding-bg-overlay.jpg') no-repeat center center;
+  background-size: cover;
   padding: 35px 50px;
-.card {
-  background-color: white;
-  border-radius: 12px;
-  max-width: 800px;
-  margin: 0;
-  box-shadow: 0 8px 20px rgba(156, 39, 176, 0.2);
-  border: 1px solid #e1bee7;
-}
 
-.container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.4); /* white overlay */
-  z-index: 1;
-  pointer-events: none;
-  border-radius: 15px;
-  padding: 25px;
-  width: 250px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    max-width: 800px;
+    margin: 0;
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.2);
+    border: 1px solid #e1bee7;
+  }
 
-.container > * {
-  position: relative;
-  z-index: 2;
-.card h3 {
-  color: #cc397b;
-}
+  .container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.4); /* white overlay */
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 15px;
+    padding: 25px;
+    width: 250px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 
-h1 {
-  text-align: center;
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.8em;
-  color: #9c27b0;
-  margin-bottom: 20px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-.card p {
-  margin: 15px 0;
-}
+  .container > * {
+    position: relative;
+    z-index: 2;
+
+    .card h3 {
+      color: #cc397b;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8em;
+      color: #9c27b0;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+      .card p {
+        margin: 15px 0;
+      }
 
 
-input, button {
-  padding: 12px;
-  margin: 10px 0;
-  width: 100%;
-  font-size: 16px;
-  border: 1px solid #ce93d8;
-  border-radius: 6px;
-  transition: 0.3s ease;
-}
+      input, button {
+        padding: 12px;
+        margin: 10px 0;
+        width: 100%;
+        font-size: 16px;
+        border: 1px solid #ce93d8;
+        border-radius: 6px;
+        transition: 0.3s ease;
+      }
 
-input:focus {
-  outline: none;
-  border-color: #ba68c8;
-  box-shadow: 0 0 5px #e1bee7;
-}
+      input:focus {
+        outline: none;
+        border-color: #ba68c8;
+        box-shadow: 0 0 5px #e1bee7;
+      }
 
-button {
-  background-color: #9c27b0;
-.card a {
-  display: inline-block;
-  margin-top: 10px;
-  background-color: #cc397b;
-  color: white;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  padding: 10px 15px;
-  text-decoration: none;
-  border-radius: 6px;
-}
+      button {
+        background-color: #9c27b0;
 
-button:hover {
-  background-color: #7b1fa2;
-  transform: scale(1.03);
-}
+        .card a {
+          display: inline-block;
+          margin-top: 10px;
+          background-color: #cc397b;
+          color: white;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          padding: 10px 15px;
+          text-decoration: none;
+          border-radius: 6px;
+        }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 25px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15);
-}
+        button:hover {
+          background-color: #7b1fa2;
+          transform: scale(1.03);
+        }
 
-table th, table td {
-  border: 1px solid #e1bee7;
-  padding: 14px;
-  text-align: center;
-  font-size: 16px;
-}
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 25px;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15);
+        }
 
-table th {
-  background-color: #f3e5f5;
-  color: #6a1b9a;
-  font-weight: 600;
-}
+        table th, table td {
+          border: 1px solid #e1bee7;
+          padding: 14px;
+          text-align: center;
+          font-size: 16px;
+        }
 
-table tr:nth-child(even) {
-  background-color: #fce4ec;
-}
+        table th {
+          background-color: #f3e5f5;
+          color: #6a1b9a;
+          font-weight: 600;
+        }
 
-table tr:hover {
-  background-color: #f8bbd0;
-  transition: 0.3s ease;
-.card a:hover {
-  background-color: #a5285f;
+        table tr:nth-child(even) {
+          background-color: #fce4ec;
+        }
+
+        table tr:hover {
+          background-color: #f8bbd0;
+          transition: 0.3s ease;
+
+          .card a:hover {
+            background-color: #a5285f;
+          }
+        }
+      }
+    }
+  }
 }
