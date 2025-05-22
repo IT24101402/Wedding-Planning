@@ -15,21 +15,23 @@
 <button onclick="finalize()">Finalize Quotation</button>
 <script>
     async function loadQuotation() {
-        const res = await fetch('http://localhost:8080/billing/quotation');
+        const username = localStorage.getItem('username'); // 👈 get logged in user
+        const res = await fetch(http://localhost:8080/billing/quotation?username=${username});
         const data = await res.json();
         let html = '';
         data.bookings.forEach((b, i) => {
             html += `<div class="booking">
-                    ${b.serviceType} - ${b.price}
-                    <button onclick="removeBooking(${i})">Delete</button>
-                </div>`;
+                ${b.serviceType} - ${b.price}
+                <button onclick="removeBooking(${i})">Delete</button>
+            </div>`;
         });
-        html += `<p><strong>Total:</strong> ${data.total}</p>`;
+        html += <p><strong>Total:</strong> ${data.total}</p>;
         document.getElementById('bookingList').innerHTML = html;
     }
 
+
     async function removeBooking(index) {
-        await fetch(`http://localhost:8080/billing/removeBooking/${index}`, { method: 'DELETE' });
+        await fetch(http://localhost:8080/billing/removeBooking/${index}, { method: 'DELETE' });
         loadQuotation();
     }
 
