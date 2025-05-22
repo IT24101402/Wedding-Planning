@@ -2,13 +2,13 @@ package com.WeddingPlanning.Backend.Service;
 
 import com.WeddingPlanning.Backend.Model.Vendor;
 import com.WeddingPlanning.Backend.Repository.VendorRepository;
+import com.WeddingPlanning.Backend.DataStructure.VendorLinkedList;
 import org.springframework.stereotype.Service;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class VendorService {
-    private LinkedList<Vendor> vendors = new LinkedList<>();
+    private VendorLinkedList vendors;
     private final VendorRepository repository;
 
     public VendorService(VendorRepository repository) {
@@ -17,84 +17,49 @@ public class VendorService {
     }
 
     public void addVendor(Vendor vendor) {
-        System.out.println("➡️ Attempting to add vendor: " + vendor.getName() + " (ID: " + vendor.getId() + ")");
+        VendorLinkedList currentVendors = repository.loadVendors();
 
-        // Load latest vendor list from file
-        LinkedList<Vendor> currentVendors = repository.loadVendors();
-
-        // Check for duplicate ID or email
-        for (Vendor v : currentVendors) {
-            if (v.getId().equals(vendor.getId())) {
-                System.out.println("⚠️ Vendor with ID " + vendor.getId() + " already exists!");
-                return; // Skip adding
-            }
-            if (v.getEmail().equalsIgnoreCase(vendor.getEmail())) {
-                System.out.println("⚠️ Vendor with Email " + vendor.getEmail() + " already exists!");
-                return; // Skip adding
-            }
+        if (currentVendors.findById(vendor.getId()) != null ||
+                currentVendors.findByEmail(vendor.getEmail()) != null) {
+            System.out.println("⚠️ Vendor already exists by ID or Email");
+            return;
         }
 
-        // Add new vendor
         currentVendors.add(vendor);
-        this.vendors = currentVendors; // Update in-memory list
+        this.vendors = currentVendors;
 
-        System.out.println("✅ Vendor added. Total vendors now: " + currentVendors.size());
-
-        // Save updated list
         repository.saveVendors(currentVendors);
-        System.out.println("💾 Vendor list saved to file.");
+        System.out.println("✅ Vendor added and saved");
     }
 
-
     public List<Vendor> getAllVendors() {
-        return vendors;
+        return vendors.toList();
     }
 
     public Vendor getVendorById(Long id) {
-        for (Vendor v : vendors) {
-            if (v.getId().equals(id)) return v;
-        }
-        return null;
+        return vendors.findById(id);
     }
+
     public Vendor getVendorByEmail(String email) {
-        for (Vendor v : vendors) {
-            if (v.getEmail().equals(email)) return v;
-        }
-        return null;
+        return vendors.findByEmail(email);
     }
-    public Vendor vendorLogin(String email, String password){
-        for (Vendor v : vendors) {
-            if (v.getEmail().equals(email)&& v.getPassword().equals(password)) return v;
-        }
-        return null;
+
+    public Vendor vendorLogin(String email, String password) {
+        Vendor v = vendors.findByEmail(email);
+        return (v != null && v.getPassword().equals(password)) ? v : null;
     }
 
     public void updateVendor(Long id, Vendor updated) {
-        for (int i = 0; i < vendors.size(); i++) {
-            if (vendors.get(i).getId().equals(id)) {
-                vendors.set(i, updated);
-                break;
-            }
-        }
+        vendors.update(id, updated);
         repository.saveVendors(vendors);
     }
 
     public void deleteVendor(Long id) {
-        vendors.removeIf(v -> v.getId().equals(id));
+        vendors.removeById(id);
         repository.saveVendors(vendors);
     }
 
     public void sortVendorsByPrice(boolean ascending) {
-        for (int i = 0; i < vendors.size() - 1; i++) {
-            for (int j = 0; j < vendors.size() - i - 1; j++) {
-                boolean condition = ascending ? vendors.get(j).getPrice() > vendors.get(j + 1).getPrice() :
-                        vendors.get(j).getPrice() < vendors.get(j + 1).getPrice();
-                if (condition) {
-                    Vendor temp = vendors.get(j);
-                    vendors.set(j, vendors.get(j + 1));
-                    vendors.set(j + 1, temp);
-                }
-            }
-        }
+        vendors.sortByPrice(ascending);
     }
 }
