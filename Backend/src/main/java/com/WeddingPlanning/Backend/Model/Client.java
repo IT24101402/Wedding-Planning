@@ -7,8 +7,8 @@ public class Client extends User  {
     // Constructor, getters, and setters
 
 
-    public Client(String id, String username, String email, String password, String phone) {
-        super(id, username, email, password, phone);
+    public Client( String username, String email, String password, String phone) {
+        super( username, email, password, phone);
 
     }
 
