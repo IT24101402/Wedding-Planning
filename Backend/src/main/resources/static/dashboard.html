@@ -5,6 +5,7 @@
     <title>User Dashboard</title>
 </head>
 <body style="margin:0; font-family: Arial, Helvetica, sans-serif; background: #f7f7f7;">
+
 <!-- Navigation Bar -->
 <div style="background:#315fa7; padding: 12px 0; text-align:center;">
     <a href="dashboard.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Dashboard</a>
@@ -13,6 +14,7 @@
     <a href="profile.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Profile</a>
     <a href="login.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Logout</a>
 </div>
+
 <div class="dashboard" style="
     max-width: 800px;
     margin: 40px auto;
@@ -28,6 +30,7 @@
         justify-content: center;
         flex-wrap: wrap;
     ">
+        <!-- Browse Vendors Card -->
         <div class="card" style="
             background: #f0f4fc;
             border-radius: 10px;
@@ -56,6 +59,8 @@
                onmouseout="this.style.background='#315fa7';"
             >Explore</a>
         </div>
+
+        <!-- My Bookings Card -->
         <div class="card" style="
             background: #f0f4fc;
             border-radius: 10px;
@@ -70,7 +75,7 @@
         >
             <h3 style="color: #315fa7; margin-bottom: 12px;">My Bookings</h3>
             <p style="color: #444; margin-bottom: 18px;">View and manage your bookings.</p>
-            <a href="bookings.html" style="
+            <a href="my-bookings.html" style="
                 display: inline-block;
                 padding: 8px 20px;
                 background: #315fa7;
@@ -84,6 +89,38 @@
                onmouseout="this.style.background='#315fa7';"
             >View Bookings</a>
         </div>
+
+        <!-- My Bookings Card -->
+        <div class="card" style="
+            background: #f0f4fc;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+            padding: 28px 22px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.2s;
+        "
+             onmouseover="this.style.transform='scale(1.04)';"
+             onmouseout="this.style.transform='scale(1)';"
+        >
+            <h3 style="color: #315fa7; margin-bottom: 12px;">My Quotation</h3>
+            <p style="color: #444; margin-bottom: 18px;">View and manage your quotation.</p>
+            <a href="quotation.html" style="
+                display: inline-block;
+                padding: 8px 20px;
+                background: #315fa7;
+                color: #fff;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: bold;
+                transition: background 0.2s;
+            "
+               onmouseover="this.style.background='#23416b';"
+               onmouseout="this.style.background='#315fa7';"
+            >View Quotation</a>
+        </div>
+
+        <!-- Profile Settings Card -->
         <div class="card" style="
             background: #f0f4fc;
             border-radius: 10px;
@@ -115,9 +152,9 @@
     </div>
 </div>
 
-<!-- Dynamic Welcome Message Script -->
+<!-- Dynamic Welcome Message Script (Updated to sessionStorage) -->
 <script>
-    const username = localStorage.getItem("loggedInUser");
+    const username = sessionStorage.getItem("loggedInUser");
     if (username) {
         document.querySelector("h1").textContent = "Welcome, " + username + "!";
     }
