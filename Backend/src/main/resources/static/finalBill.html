@@ -1,12 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel = "stylesheet" href = "finalBill.css">
+    <meta charset="UTF-8">
     <title>Final Bill</title>
+    <link rel="stylesheet" href="finalBill.css">
 </head>
 <body>
-<h1>Final Bill</h1>
-<div id="bill"></div>
+<h1>Final Bill </h1>
+<div class="card">
+    <table>
+        <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>User</th>
+            <th>Service</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr><td>001</td><td>Kasun</td><td>Wedding Dress</td><td>$100</td></tr>
+        <tr><td>002</td><td>Ilma</td><td>Banquet Hall</td><td>$200</td></tr>
+        </tbody>
+    </table>
+    <div class="summary">
+        <p>Tax: $30</p>
+        <p><strong>Total: $330</strong></p>
+        <p>Status: <span class="confirmed">Confirmed</span></p>
+    </div>
+</div>
 <script>
     async function loadBill() {
         const res = await fetch('http://localhost:8080/billing/quotation');

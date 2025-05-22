@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel = "stylesheet" href = "payment.css">
-    <title>Payment</title>
+    <meta charset="UTF-8">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="payment.css">
 </head>
 <body>
 <h1>Payment Page</h1>
-<button onclick="pay()">Pay Now</button>
+<div class="payment-methods">
+    <button>Credit Card</button>
+    <button>Bank Transfer</button>
+    <button>Cash</button>
+</div>
+<div class="card">
+    <p>Total: $330</p>
+    <p class="success">Payment Successful</p>
+</div>
 <script>
     async function pay() {
         await fetch('http://localhost:8080/billing/pay', { method: 'POST' });

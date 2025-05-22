@@ -1,3 +1,4 @@
 tharuka,123@gmail.com,1234,123456
 ilma,123@mail.com,1234,123456
+Tharuka,tharuka1@gmail.com,1234,0778546938
 ramzy,ra4352@gmail.com,123456,345678
