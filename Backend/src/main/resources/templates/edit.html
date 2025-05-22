@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-image: url('/Users/tharukakumarasiri/Wedding-Planning/Backend/src/main/resources/templates/iStock-953087644-1-e1547109570371.jpg');
+      background-image: url('https://images.unsplash.com/photo-1510076857177-7470076d4098?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2VkZGluZyUyMHZlbnVlfGVufDB8fDB8fHww');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -22,11 +22,14 @@
     }
 
     form {
-      background-color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       padding: 30px;
       width: 420px;
-      border-radius: 15px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     label {
@@ -99,7 +102,7 @@
   <input type="text" name="contact" th:value="${vendor.contact}" required>
 
   <button type="submit">Update</button>
-  <a href="/vendors">Back to List</a>
+  <a href="/vendors">Back to All vendors</a>
 </form>
 
 </body>
