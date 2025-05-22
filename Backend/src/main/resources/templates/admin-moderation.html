@@ -1,123 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Moderation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Admin Panel</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
         body {
+            background-image: url('/background_whole.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(255,255,255,0.5);
+            background-blend-mode: lighten;
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background: linear-gradient(to right, #f3e5f5, #e1bee7);
-            padding: 20px;
         }
-
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 36px;
-            color: #6a1b9a;
+        h2 {
             text-align: center;
-            margin-bottom: 30px;
+            color: #531753;
+            font-family: 'Dancing Script', cursive;
+            font-size: 35px;
         }
-
-        .panel {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(106, 27, 154, 0.2);
-            max-width: 1000px;
-            margin: auto;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            background: rgb(60, 19, 60);
         }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-        }
-
         th {
-            background-color: #6a1b9a;
-            color: white;
+            background-color: #d1a8d1;
+            padding: 10px;
         }
-
-        tr:nth-child(even) {
-            background-color: #f3e5f5;
+        td {
+            padding: 10px;
+            border: 1px solid #bc80bc;
         }
-
-        .button {
-            background-color: #6a1b9a;
-            color: white;
-            padding: 12px 24px;
-            text-align: center;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-        }
-
-        .button:hover {
-            background-color: #4a148c;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .review-type-guest {
-            color: #333;
-        }
-
-        .review-type-verified {
-            color: #6a1b9a;
+        .verified {
+            background-color: #ddc8dd;
             font-weight: bold;
+            color: #4c1f4c;
         }
-
-        form {
-            margin: 0;
+        .guest {
+            background-color: #efe8ef;
+            font-style: italic;
+            color: #4c1f4c;
+        }
+        button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        p {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-<h1>Admin Moderation Panel</h1>
-<div class="panel">
-    <table>
-        <thead>
-        <tr>
-            <th>Vendor Name</th>
-            <th>Reviewer Type</th>
-            <th>Rating</th>
-            <th>Comment</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="review : ${reviews}">
-            <td th:text="${review.vendorName}"></td>
-            <td th:text="${review.reviewerType}" th:classappend="${review.reviewerType == 'Verified' ? 'review-type-verified' : 'review-type-guest'}"></td>
-            <td th:text="${review.rating}"></td>
-            <td th:text="${review.comment}"></td>
-            <td>
-                <form th:action="@{/admin/delete}" method="post">
-                    <input type="hidden" name="id" th:value="${review.id}"/>
-                    <button type="submit" class="button">Delete</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="center">
-        <a href="/submit-review" class="button">Submit Another Review</a>
-    </div>
-</div>
+<h2>Admin Moderation Panel</h2>
+<table>
+    <tr>
+        <th>Vendor Name</th>
+        <th>Reviewer</th>
+        <th>Type</th>
+        <th>Rating</th>
+        <th>Review</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="review : ${reviews}"
+        th:classappend="${review.type.toLowerCase() == 'verified'} ? 'verified' : 'guest'">
+        <td th:text="${review.vendorName}"></td>
+        <td th:text="${review.reviewerName}"></td>
+        <td th:text="${review.type}"></td>
+        <td th:text="${review.rating}"></td>
+        <td th:text="${review.display()}"></td>
+        <td>
+            <form action="/delete" method="post">
+                <input type="hidden" name="id" th:value="${review.id}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<p style="text-align:center; margin-top: 20px;">
+    <a href="/submit-review" style="color:#4a0d4a;" >Submit New Review</a> |
+    <a href="/view" style="color:#4a0d4a;">View All Reviews</a>
+</p>
 </body>
 </html>
