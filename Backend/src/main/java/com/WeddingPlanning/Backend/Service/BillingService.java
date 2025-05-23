@@ -105,11 +105,7 @@ public class BillingService {
                     String serviceType = parts[2].trim();
                     double price = Double.parseDouble(parts[3].trim());
 
-                    Reservation r = new Reservation(customerName, vendorName, serviceType, price);
-                    r.setCustomerName(customerName);
-                    r.setVendorName(vendorName);
-                    r.setServiceType(serviceType);
-                    r.setPrice(price);
+                    Reservation r = Reservation.fromString(line);
                     reservations.add(r);
                 }
             }

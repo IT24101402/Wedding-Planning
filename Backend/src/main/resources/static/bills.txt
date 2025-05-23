@@ -20,3 +20,81 @@ Total: 655000.0
 Finalized: false
 Paid: false
 ---
+Bill:
+Wedding Dress,85000.0
+Banquet Hall,250000.0
+Floral Decorations,45000.0
+Music Instruments,60000.0
+Food Catering,120000.0
+Car rental,60000.0
+Floral Decorations,45000.0
+Wedding Dress,85000.0
+Lighting Decorations,38000.0
+Music Instruments,60000.0
+Photography,75000.0
+Floral Decorations,45000.0
+Liqour,95000.0
+Floral Decorations,45000.0
+Banquet Hall,250000.0
+Food Catering,120000.0
+Car rental,60000.0
+Food Catering,120000.0
+Total: 1658000.0
+Finalized: false
+Paid: false
+---
+Bill:
+Wedding Dress,85000.0
+Banquet Hall,250000.0
+Floral Decorations,45000.0
+Music Instruments,60000.0
+Food Catering,120000.0
+Beauty Treatments,25000.0
+Car rental,60000.0
+Floral Decorations,45000.0
+Wedding Dress,85000.0
+Lighting Decorations,38000.0
+Music Instruments,60000.0
+Photography,75000.0
+Floral Decorations,45000.0
+Liqour,95000.0
+Floral Decorations,45000.0
+Banquet Hall,250000.0
+Food Catering,120000.0
+Car rental,60000.0
+Food Catering,120000.0
+Beauty Treatments,25000.0
+Total: 1708000.0
+Finalized: false
+Paid: false
+---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
