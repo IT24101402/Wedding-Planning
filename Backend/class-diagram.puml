@@ -96,6 +96,38 @@ package Model {
   class GuestReview {
     +display():String
   }
+   class Client {
+      -weddingDate: String
+      +getWeddingDate(): String
+      +setWeddingDate(weddingDate: String): void
+    }
+
+    class Quotation {
+      -bookings: List<Reservation>
+      -total: double
+      +addBooking(booking: Reservation): void
+      +removeBooking(index: int): void
+      +calculateTotal(): void
+      +getBookings(): List<Reservation>
+      +getTotal(): double
+    }
+
+    class Reservation {
+      -customerName: String
+      -vendorName: String
+      -serviceType: String
+      -price: double
+      +getCustomerName(): String
+      +setCustomerName(customerName: String): void
+      +getVendorName(): String
+      +setVendorName(vendorName: String): void
+      +getServiceType(): String
+      +setServiceType(serviceType: String): void
+      +getPrice(): double
+      +setPrice(price: double): void
+      +toString(): String
+      +fromString(line: String): Reservation
+    }
 }
 
 package Repository {
@@ -245,5 +277,12 @@ BillingRepository ..> Bill
 Photographer --|> Vendor
 VerifiedReview --|> Review
 GuestReview --|> Review
+Client --|> User
+Photographer --|> Vendor
+VerifiedReview --|> Review
+GuestReview --|> Review
+
+' Associations
+Quotation --> Reservation
 
 @enduml
