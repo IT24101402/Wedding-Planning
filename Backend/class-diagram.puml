@@ -29,10 +29,10 @@ package Controller {
 
 package Model {
   class User {
-    -id: Long
-    -name: String
+    -username: String
     -email: String
     -password: String
+    -Phone: String
     +getId(): Long
     +getName(): String
     +getEmail(): String
@@ -42,19 +42,29 @@ package Model {
   class Vendor {
     -id: Long
     -name: String
-    -serviceType: String
-    -location: String
+    -category: String
+    -price: double
+    -contact: String
+    -email: String
+    -password: String
     +getId(): Long
     +getName(): String
-    +getServiceType(): String
-    +getLocation(): String
+    +getServiceType: String
+    +getEmail(): String
+    +getPassword(): String
+    +getContact(): String
+    +getPrice(): String
   }
 
   class Booking {
-    -id: Long
-    -userId: Long
-    -vendorId: Long
-    -bookingDate: Date
+    -bookingId: String
+    -userName: String
+    -VendorName: String
+    -ServiceType: String
+    -BookingDate: String
+    -BookingTime: String
+    +toString(): String
+    +getConfirmationMessage():String
     +getId(): Long
     +getUserId(): Long
     +getVendorId(): Long
@@ -62,27 +72,22 @@ package Model {
   }
 
   class Bill {
-    -id: Long
-    -bookingId: Long
-    -amount: Double
-    -dateIssued: Date
-    +getId(): Long
-    +getBookingId(): Long
-    +getAmount(): Double
-    +getDateIssued(): Date
+    -isFinalized: boolean
+    -isPaid: boolean
+    +finalizedBill(): boolean
+    +payBill(): boolean
+    +isFinalized(): boolean
+    +isPaid(): boolean
   }
 
   class Review {
     -id: Long
-    -vendorId: Long
-    -userId: Long
     -rating: int
-    -comment: String
-    +getId(): Long
-    +getVendorId(): Long
-    +getUserId(): Long
-    +getRating(): int
-    +getComment(): String
+    -content: String
+    -type: String
+    -vendorName: String
+    -reviewerName: String
+    +display(): String
   }
 
   class Photographer {
