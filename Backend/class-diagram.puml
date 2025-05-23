@@ -1,0 +1,249 @@
+@startuml class-diagram
+
+package Controller {
+  class UserController {
+    +registerUser(user: User): String
+    +getUserById(userId: Long): User
+  }
+
+  class VendorController {
+    +addVendor(vendor: Vendor): String
+    +getVendors(): List<Vendor>
+  }
+
+  class BookingController {
+    +bookVendor(booking: Booking): String
+    +getBookingDetails(id: Long): Booking
+  }
+
+  class BillingController {
+    +generateBill(bill: Bill): String
+    +getBillDetails(id: Long): Bill
+  }
+
+  class ReviewController {
+    +addReview(review: Review): String
+    +getReviewsByVendorId(vendorId: Long): List<Review>
+  }
+}
+
+package Model {
+  class User {
+    -id: Long
+    -name: String
+    -email: String
+    -password: String
+    +getId(): Long
+    +getName(): String
+    +getEmail(): String
+    +getPassword(): String
+  }
+
+  class Vendor {
+    -id: Long
+    -name: String
+    -serviceType: String
+    -location: String
+    +getId(): Long
+    +getName(): String
+    +getServiceType(): String
+    +getLocation(): String
+  }
+
+  class Booking {
+    -id: Long
+    -userId: Long
+    -vendorId: Long
+    -bookingDate: Date
+    +getId(): Long
+    +getUserId(): Long
+    +getVendorId(): Long
+    +getBookingDate(): Date
+  }
+
+  class Bill {
+    -id: Long
+    -bookingId: Long
+    -amount: Double
+    -dateIssued: Date
+    +getId(): Long
+    +getBookingId(): Long
+    +getAmount(): Double
+    +getDateIssued(): Date
+  }
+
+  class Review {
+    -id: Long
+    -vendorId: Long
+    -userId: Long
+    -rating: int
+    -comment: String
+    +getId(): Long
+    +getVendorId(): Long
+    +getUserId(): Long
+    +getRating(): int
+    +getComment(): String
+  }
+
+  class Photographer {
+    +getSpecialFeature():String
+  }
+
+  class VerifiedReview {
+    +display():String
+  }
+
+  class GuestReview {
+    +display():String
+  }
+}
+
+package Repository {
+  interface UserRepository {
+    +save(user: User): void
+    +findById(id: Long): User
+  }
+
+  interface VendorRepository {
+    +save(vendor: Vendor): void
+    +findAll(): List<Vendor>
+  }
+
+  interface BookingRepository {
+    +save(booking: Booking): void
+    +findById(id: Long): Booking
+  }
+
+  interface BillingRepository {
+    +save(bill: Bill): void
+    +findById(id: Long): Bill
+  }
+
+  interface ReviewRepository {
+    +save(review: Review): void
+    +findByVendorId(vendorId: Long): List<Review>
+  }
+}
+
+package Service {
+  class UserService {
+    +register(user: User): String
+    +getUser(id: Long): User
+  }
+
+  class VendorService {
+    +addVendor(vendor: Vendor): String
+    +getAllVendors(): List<Vendor>
+  }
+
+  class BookingService {
+    +createBooking(booking: Booking): String
+    +getBooking(id: Long): Booking
+  }
+
+  class BillingService {
+    +createBill(bill: Bill): String
+    +getBill(id: Long): Bill
+  }
+
+  class ReviewService {
+    +addReview(review: Review): String
+    +getReviews(vendorId: Long): List<Review>
+  }
+}
+
+package DataStructure {
+  class BookingQueue {
+    -queue: Queue<Booking>
+    +enqueue(booking: Booking): void
+    +dequeue(): Booking
+  }
+
+  class VendorAvailabilityMap {
+    -availability: Map<Long, Boolean>
+    +isAvailable(vendorId: Long): Boolean
+    +setAvailability(vendorId: Long, available: Boolean): void
+  }
+}
+
+' Relationships between packages
+UserController --> UserService1
+UserService --> UserRepository
+UserController --> User
+UserRepository --> User
+
+VendorController --> VendorService1
+VendorService --> VendorRepository
+VendorController --> Vendor
+VendorRepository --> Vendor
+
+BookingController --> BookingService1
+BookingService --> BookingRepository
+BookingController --> Booking
+BookingRepository --> Booking
+
+BillingController --> BillingService1
+BillingService --> BillingRepository
+BillingController --> Bill
+BillingRepository --> Bill
+
+ReviewController --> ReviewService1
+ReviewService --> ReviewRepository
+ReviewController --> Review
+ReviewRepository --> Review
+
+BookingService --> BookingQueue
+VendorService --> VendorAvailabilityMap
+
+' OOP Relationships
+
+' UserServiceImpl implements UserService
+UserServiceImpl ..|> UserService
+
+' VendorServiceImpl implements VendorService
+VendorServiceImpl ..|> VendorService
+
+' BookingServiceImpl implements BookingService
+BookingServiceImpl ..|> BookingService
+
+' ReviewServiceImpl implements ReviewService
+ReviewServiceImpl ..|> ReviewService
+
+' BillingServiceImpl implements BillingService
+BillingServiceImpl ..|> BillingService
+
+' UserController depends on UserService
+UserController ..> UserService
+
+' VendorController depends on VendorService
+VendorController ..> VendorService
+
+' BookingController depends on BookingService
+BookingController ..> BookingService
+
+' ReviewController depends on ReviewService
+ReviewController ..> ReviewService
+
+' BillingController depends on BillingService
+BillingController ..> BillingService
+
+' Services depend on Repositories
+UserService ..> UserRepository
+VendorService ..> VendorRepository
+BookingService ..> BookingRepository
+ReviewService ..> ReviewRepository
+BillingService ..> BillingRepository
+
+' Repositories depend on Models
+UserRepository ..> User
+VendorRepository ..> Vendor
+BookingRepository ..> Booking
+ReviewRepository ..> Review
+BillingRepository ..> Bill
+
+' Inheritance relationships
+Photographer --|> Vendor
+VerifiedReview --|> Review
+GuestReview --|> Review
+
+@enduml
