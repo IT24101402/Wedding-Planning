@@ -7,39 +7,51 @@
 </head>
 <body>
 <h1>Final Bill </h1>
+<h2 id="customerName" class="customer-name"></h2>
+
 <div class="card">
     <table>
         <thead>
         <tr>
-            <th>Booking ID</th>
-            <th>User</th>
+            <th>Vendor</th>
             <th>Service</th>
             <th>Price</th>
         </tr>
         </thead>
-        <tbody>
-        <tr><td>001</td><td>Kasun</td><td>Wedding Dress</td><td>$100</td></tr>
-        <tr><td>002</td><td>Ilma</td><td>Banquet Hall</td><td>$200</td></tr>
+        <tbody id="quotationTableBody">
+        <!-- Rows will be dynamically inserted here -->
         </tbody>
     </table>
-    <div class="summary">
-        <p>Tax: $30</p>
-        <p><strong>Total: $330</strong></p>
-        <p>Status: <span class="confirmed">Confirmed</span></p>
-    </div>
+    <div class="total" id="totalAmount">Total: $0</div>
 </div>
+
+<button class="finalize-btn">Finalize Bill</button>
+
 <script>
     async function loadBill() {
-        const res = await fetch('http://localhost:8080/billing/quotation');
+        const username = sessionStorage.getItem('loggedInUser');
+        document.getElementById('customerName').innerText = `Customer Name: ${username}`;
+        const res = await fetch(`http://localhost:8080/billing/quotationByUser?username=${username}`);
         const data = await res.json();
-        let html = '<ul>';
-        data.bookings.forEach(b => {
-            html += `<li>${b.serviceType} - ${b.price}</li>`;
+
+        const tableBody = document.getElementById('quotationTableBody');
+        tableBody.innerHTML = '';
+        let total = 0;
+
+        data.bookings.forEach((b, i) => {
+            if (b.customerName === username) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${b.vendorName}</td>
+                    <td>${b.serviceType}</td>
+                    <td>${b.price}</td>
+                `;
+                tableBody.appendChild(row);
+                total += b.price;
+            }
         });
-        html += `</ul><p>Total: ${data.total}</p>
-                     <p>Finalized: ${data.finalized}</p>
-                     <p>Paid: ${data.paid}</p>`;
-        document.getElementById('bill').innerHTML = html;
+
+        document.getElementById('totalAmount').innerText = `Total: ${total}`;
     }
 
     loadBill();

@@ -5,6 +5,7 @@ import com.WeddingPlanning.Backend.Model.Bill;
 import com.WeddingPlanning.Backend.Model.Reservation;
 import com.WeddingPlanning.Backend.Service.BillingService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class BillingController {
     }
 
     @GetMapping("/quotationByUser")
-    public Map<String, Object> getQuotation(@RequestParam String username) {
+    public Map<String, Object> getQuotationByUser(@RequestParam String username) {
         List<Reservation> allBookings = service.readFromReservationTxt(); // your logic in service
         List<Reservation> userBookings = allBookings.stream()
                 .filter(b -> b.getCustomerName().equalsIgnoreCase(username))

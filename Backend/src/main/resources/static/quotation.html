@@ -7,53 +7,75 @@
 </head>
 <body>
 <h1>Quotation Page</h1>
+<h2 id="customerName" class="customer-name"></h2>
+
 <div class="card">
     <table>
         <thead>
         <tr>
-            <th>Booking ID</th>
-            <th>User</th>
+            <th>Vendor</th>
             <th>Service</th>
             <th>Price</th>
             <th>Actions</th>
         </tr>
         </thead>
-        <tbody>
-        <tr><td>001</td><td>Kasun</td><td>Wedding Dress</td><td>$100</td><td><button>Edit</button> <button>Delete</button></td></tr>
-        <tr><td>002</td><td>Ilma</td><td>Banquet Hall</td><td>$200</td><td><button>Edit</button> <button>Delete</button></td></tr>
+        <tbody id="quotationTableBody">
+        <!-- Rows will be dynamically inserted here -->
         </tbody>
     </table>
-    <div class="total">Total: $300</div>
+    <div class="total" id="totalAmount">Total: $0</div>
 </div>
+
 <button class="finalize-btn">Finalize Quotation</button>
+
 <script>
     async function loadQuotation() {
-        const username = localStorage.getItem('loggedInUser'); // 👈 get logged in user
-        const res = await fetch(`http://localhost:8080/billing/quotation?username=${username}`);
+        const username = sessionStorage.getItem('loggedInUser');
+        document.getElementById('customerName').innerText = `Customer Name: ${username}`;
+        const res = await fetch(`http://localhost:8080/billing/quotationByUser?username=${username}`);
         const data = await res.json();
-        let html = '';
+
+        const tableBody = document.getElementById('quotationTableBody');
+        tableBody.innerHTML = '';
+        let total = 0;
+
         data.bookings.forEach((b, i) => {
-            html += `<div class="booking">
-                ${b.serviceType} - ${b.price}
-                <button onclick="removeBooking(${i})">Delete</button>
-            </div>`;
+            if (b.customerName === username) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${b.vendorName}</td>
+                    <td>${b.serviceType}</td>
+                    <td>${b.price}</td>
+                    <td><button onclick="removeBooking(${i})">Delete</button></td>
+                `;
+                tableBody.appendChild(row);
+                total += b.price;
+            }
         });
-        html += <p><strong>Total:</strong> ${data.total}</p>;
-        document.getElementById('bookingList').innerHTML = html;
+
+        document.getElementById('totalAmount').innerText = `Total: ${total}`;
     }
 
-
     async function removeBooking(index) {
-        await fetch(http://localhost:8080/billing/removeBooking/${index}, { method: 'DELETE' });
+        await fetch(`http://localhost:8080/billing/removeBooking/${index}`, { method: 'DELETE' });
         loadQuotation();
     }
 
     async function finalize() {
-        await fetch('http://localhost:8080/billing/finalize', { method: 'POST' });
-        alert('Quotation finalized.');
-    }
+    await fetch('http://localhost:8080/billing/finalize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: sessionStorage.getItem('loggedInUser') })
+    });
+
+    // Go to the final bill page
+    window.location.href = 'finalBill.html';
+}
+
+    document.querySelector('.finalize-btn').addEventListener('click', finalize);
 
     loadQuotation();
 </script>
 </body>
+
 </html>
