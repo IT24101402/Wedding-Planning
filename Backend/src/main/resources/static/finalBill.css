@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+
 body::before {
     content: "";
     background: url("wedding-invitation-with-rings-and-flowers-free-photo.jpeg") no-repeat center center fixed;
@@ -12,7 +14,7 @@ body::before {
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poetsen One', sans-serif;
     margin: 40px;
     color: #333;
     text-align: center;
@@ -67,4 +69,14 @@ tr:nth-child(odd) {
 
 .confirmed {
     color: green;
+}
+.finalize-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 14px 28px;
+    font-size: 16px;
+    background-color: #8e24aa;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
 }
