@@ -3,36 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile - Wedding Planner</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Brush Script MT', cursive;
+            background: url('wed3.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            font-weight: bold;
+            font-size: 15px; /* Smaller base font size */
+        }
+        .overlay {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.1);
+            min-height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .profile-container {
+            max-width: 370px;
+            margin: 50px auto;
+            background: rgba(255,255,255,0.2);
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            padding: 28px 20px 18px 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            font-weight: bold;
+        }
+        h2 {
+            text-align: center;
+            color: #1f3255;
+            margin-bottom: 18px;
+            font-weight: bold;
+            font-size: 22px;
+            font-family: 'Brush Script MT', cursive;
+        }
+        label {
+            text-align: left;
+            color: #444;
+            font-weight: bold;
+            font-size: 15px;
+            font-family: 'Brush Script MT', cursive;
+            margin-bottom: 4px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            padding: 7px 10px;
+            border: 1.2px solid #c0c0c0;
+            border-radius: 5px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.85);
+            margin-bottom: 6px;
+            font-family: 'Brush Script MT', cursive;
+            font-weight: bold;
+        }
+        input[readonly] {
+            background: #f1f1f1;
+            color: #888;
+        }
+        button[type="submit"] {
+            margin-top: 10px;
+            padding: 9px 0;
+            background: #d2b48c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: 'Brush Script MT', cursive;
+        }
+        button[type="submit"]:hover {
+            background: #b89b6b;
+        }
+        .profile-container a {
+            color: #654321;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 15px;
+            margin: 0 4px;
+        }
+        .profile-container a:hover {
+            color: #3d2412;
+        }
+        .profile-container p {
+            margin-top: 10px;
+            color: #555;
+            font-size: 15px;
+            font-family: 'Brush Script MT', cursive;
+            font-weight: bold;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body style="margin:0; padding:0; background: #f7f7f7; font-family: Arial, Helvetica, sans-serif;">
-<div class="profile-container" style="max-width: 400px; margin: 60px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); padding: 36px 30px 24px 30px;">
-    <h2 style="text-align: center; color: #2d3e50; margin-bottom: 28px;">Update Profile</h2>
-    <form id="updateForm" style="display: flex; flex-direction: column; gap: 15px;">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" readonly style="padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 5px; background: #f1f1f1; color: #888;">
+<body>
+<div class="overlay">
+    <div class="profile-container">
+        <h2>Update Profile</h2>
+        <form id="updateForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" readonly>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone" required>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" required>
 
-        <label for="password">New Password</label>
-        <input type="password" id="password" name="password">
+            <label for="password">New Password</label>
+            <input type="password" id="password" name="password">
 
-        <button type="submit" style="margin-top: 12px; padding: 10px 0; background: #315fa7; color: #fff; border: none; border-radius: 5px; font-size: 16px;">Save Changes</button>
-    </form>
-    <p style="margin-top: 20px;">
-        <a href="dashboard.html">Back to Dashboard</a> |
-        <a href="login.html">Logout</a>
-    </p>
+            <button type="submit">Save Changes</button>
+        </form>
+        <p>
+            <a href="dashboard.html" class="dashboard-link">Back to Dashboard</a> |
+            <a href="login.html" class="logout-link">Logout</a>
+        </p>
+    </div>
 </div>
 
 <script>
     window.onload = async function () {
         const loggedInUser = sessionStorage.getItem("loggedInUser");
-        console.log("[LOG] Session loggedInUser: ", loggedInUser);
-
         if (!loggedInUser) {
             alert("You are not logged in.");
             window.location.href = "login.html";
@@ -41,23 +143,18 @@
 
         try {
             const url = "http://localhost:8080/api/users/user/profile?username=" + encodeURIComponent(loggedInUser);
-            console.log("[LOG] Fetching user profile from: ", url);
-
             const res = await fetch(url);
-            console.log("[LOG] Response status: ", res.status);
 
             if (!res.ok) throw new Error("User not found or server error");
 
             const data = await res.json();
-            console.log("[LOG] User data received: ", data);
 
-            document.getElementById("username").value = data.username;
-            document.getElementById("email").value = data.email;
-            document.getElementById("phone").value = data.phone;
-            document.getElementById("password").value = data.password;
+            document.getElementById("username").value = data.username || "";
+            document.getElementById("email").value = data.email || "";
+            document.getElementById("phone").value = data.phone || "";
+            document.getElementById("password").value = data.password || "";
 
         } catch (err) {
-            console.error("[ERROR] Failed to load profile data: ", err);
             alert("❌ Could not load user profile.");
         }
     };
@@ -72,8 +169,6 @@
             password: document.getElementById("password").value.trim()
         };
 
-        console.log("[LOG] Sending updated user data: ", updatedUser);
-
         try {
             const res = await fetch("http://localhost:8080/api/users/update", {
                 method: "PUT",
@@ -84,8 +179,6 @@
             });
 
             const message = await res.text();
-            console.log("[LOG] Update response status: ", res.status);
-            console.log("[LOG] Update response message: ", message);
 
             if (res.ok) {
                 alert("✅ " + message);
@@ -96,7 +189,6 @@
             }
 
         } catch (err) {
-            console.error("[ERROR] Failed to update profile: ", err);
             alert("❌ Failed to update profile.");
         }
     });
