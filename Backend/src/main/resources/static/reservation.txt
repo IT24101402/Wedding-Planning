@@ -11,7 +11,7 @@ Shenali,Sunray Lights,Lighting Decorations,38000.0
 Vishmi,Amazing DJ,Music Instruments,60000.0
 Ilma,Ramz Photography,Photography,75000.0
 Kasun,Olu Floral,Floral Decorations,45000.0
-Kasun,Golden Wine Stores,Liqour,95000.0
+Kasun,Golden Wine Stores,Liquor,95000.0
 Tharuka,Olu Floral,Floral Decorations,45000.0
 Vishmi,Cinnamon Grand,Banquet Hall,250000.0
 Shenali,Vishmi Caters,Food Catering,120000.0
