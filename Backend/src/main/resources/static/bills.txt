@@ -98,3 +98,8 @@ Total: 0.0
 Finalized: true
 Paid: false
 ---
+Bill:
+Total: 0.0
+Finalized: true
+Paid: false
+---
