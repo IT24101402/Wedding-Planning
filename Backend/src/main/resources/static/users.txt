@@ -3,3 +3,4 @@ Kasun,kasun123@mail.com,K12345,0703323887
 Ilma,ilma123@mail.com,I12345,0762134455
 Shenali,shenali123@mail.com,S12345,0786554267
 Vishmi,vishmi123@mail.com,V12345,0718745659
+amaani,amani23@yahoo.com,890,2345

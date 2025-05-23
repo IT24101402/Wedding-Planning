@@ -3,162 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Brush Script MT', cursive;
+            background: url('wed3.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            font-weight: bold;
+            font-size: 18px; /* Medium size */
+        }
+
+        .overlay {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.1);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: #d2b48c;
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a.logout-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 0;
+            padding-left: 24px;
+            font-size: 18px;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .dashboard {
+            max-width: 820px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f3255;
+            margin-bottom: 36px;
+            font-weight: bold;
+            font-size: 24px;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .card-grid {
+            display: flex;
+            gap: 28px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            padding: 26px 22px;
+            width: 220px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            color: #1f3255;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 20px;
+            font-family: 'Brush Script MT', cursive;
+        }
+
+        .card p {
+            color: #333;
+            margin-bottom: 18px;
+            font-size: 16px;
+            font-family: 'Brush Script MT', cursive;
+            font-weight: bold;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #d2b48c;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            font-family: 'Brush Script MT', cursive;
+            transition: background 0.3s ease;
+        }
+
+        .card a:hover {
+            background: #b89b6b;
+        }
+    </style>
 </head>
-<body style="margin:0; font-family: Arial, Helvetica, sans-serif; background: #f7f7f7;">
+<body>
+<div class="overlay">
+    <div class="navbar">
+        <a href="login.html" class="logout-link">Logout</a>
+    </div>
 
-<!-- Navigation Bar -->
-<div style="background:#315fa7; padding: 12px 0; text-align:center;">
-    <a href="dashboard.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Dashboard</a>
-    <a href="vendors.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Vendors</a>
-    <a href="bookings.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Bookings</a>
-    <a href="profile.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Profile</a>
-    <a href="login.html" style="color:#fff; text-decoration:none; margin:0 18px; font-weight:bold;">Logout</a>
-</div>
+    <div class="dashboard">
+        <h1 id="welcome-text">Welcome, Guest!</h1>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Browse Vendors</h3>
+                <p>Find photographers, venues, and more.</p>
+                <a href="/vendors">Explore</a>
+            </div>
 
-<div class="dashboard" style="
-    max-width: 800px;
-    margin: 40px auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-    padding: 40px 30px 30px 30px;
-">
-    <h1 style="text-align: center; color: #2d3e50; margin-bottom: 36px;">Welcome, Guest!</h1>
-    <div class="card-grid" style="
-        display: flex;
-        gap: 32px;
-        justify-content: center;
-        flex-wrap: wrap;
-    ">
-        <!-- Browse Vendors Card -->
-        <div class="card" style="
-            background: #f0f4fc;
-            border-radius: 10px;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-            padding: 28px 22px;
-            width: 220px;
-            text-align: center;
-            transition: transform 0.2s;
-        "
-             onmouseover="this.style.transform='scale(1.04)';"
-             onmouseout="this.style.transform='scale(1)';"
-        >
-            <h3 style="color: #315fa7; margin-bottom: 12px;">Browse Vendors</h3>
-            <p style="color: #444; margin-bottom: 18px;">Find photographers, venues, and more.</p>
-            <a href="/vendors" style="
-                display: inline-block;
-                padding: 8px 20px;
-                background: #315fa7;
-                color: #fff;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background 0.2s;
-            "
-               onmouseover="this.style.background='#23416b';"
-               onmouseout="this.style.background='#315fa7';"
-            >Explore</a>
-        </div>
+            <div class="card">
+                <h3>New Booking</h3>
+                <p>Create a new booking.</p>
+                <a href="booking.html">Create Booking</a>
+            </div>
 
-        <!-- My Bookings Card -->
-        <div class="card" style="
-            background: #f0f4fc;
-            border-radius: 10px;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-            padding: 28px 22px;
-            width: 220px;
-            text-align: center;
-            transition: transform 0.2s;
-        "
-             onmouseover="this.style.transform='scale(1.04)';"
-             onmouseout="this.style.transform='scale(1)';"
-        >
-            <h3 style="color: #315fa7; margin-bottom: 12px;">My Bookings</h3>
-            <p style="color: #444; margin-bottom: 18px;">View and manage your bookings.</p>
-            <a href="my-bookings.html" style="
-                display: inline-block;
-                padding: 8px 20px;
-                background: #315fa7;
-                color: #fff;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background 0.2s;
-            "
-               onmouseover="this.style.background='#23416b';"
-               onmouseout="this.style.background='#315fa7';"
-            >View Bookings</a>
-        </div>
+            <div class="card">
+                <h3>My Bookings</h3>
+                <p>View and manage your bookings.</p>
+                <a href="my-bookings.html">View Bookings</a>
+            </div>
 
-        <!-- My Bookings Card -->
-        <div class="card" style="
-            background: #f0f4fc;
-            border-radius: 10px;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-            padding: 28px 22px;
-            width: 220px;
-            text-align: center;
-            transition: transform 0.2s;
-        "
-             onmouseover="this.style.transform='scale(1.04)';"
-             onmouseout="this.style.transform='scale(1)';"
-        >
-            <h3 style="color: #315fa7; margin-bottom: 12px;">My Quotation</h3>
-            <p style="color: #444; margin-bottom: 18px;">View and manage your quotation.</p>
-            <a href="quotation.html" style="
-                display: inline-block;
-                padding: 8px 20px;
-                background: #315fa7;
-                color: #fff;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background 0.2s;
-            "
-               onmouseover="this.style.background='#23416b';"
-               onmouseout="this.style.background='#315fa7';"
-            >View Quotation</a>
-        </div>
+            <div class="card">
+                <h3>My Quotation</h3>
+                <p>View and manage your quotation.</p>
+                <a href="quotation.html">View Quotation</a>
+            </div>
 
-        <!-- Profile Settings Card -->
-        <div class="card" style="
-            background: #f0f4fc;
-            border-radius: 10px;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-            padding: 28px 22px;
-            width: 220px;
-            text-align: center;
-            transition: transform 0.2s;
-        "
-             onmouseover="this.style.transform='scale(1.04)';"
-             onmouseout="this.style.transform='scale(1)';"
-        >
-            <h3 style="color: #315fa7; margin-bottom: 12px;">Profile Settings</h3>
-            <p style="color: #444; margin-bottom: 18px;">Edit your personal details.</p>
-            <a href="profile.html" style="
-                display: inline-block;
-                padding: 8px 20px;
-                background: #315fa7;
-                color: #fff;
-                border-radius: 5px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background 0.2s;
-            "
-               onmouseover="this.style.background='#23416b';"
-               onmouseout="this.style.background='#315fa7';"
-            >Update Profile</a>
+            <div class="card">
+                <h3>Profile Settings</h3>
+                <p>Edit your personal details.</p>
+                <a href="profile.html">Update Profile</a>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Dynamic Welcome Message Script (Updated to sessionStorage) -->
 <script>
     const username = sessionStorage.getItem("loggedInUser");
     if (username) {
-        document.querySelector("h1").textContent = "Welcome, " + username + "!";
+        document.getElementById("welcome-text").textContent = "Welcome, " + username + "!";
     }
 </script>
-
 </body>
 </html>
