@@ -11,7 +11,7 @@
 1747987264976,Vishmi,Amazing DJ,Music Instruments,2025-07-06,09:30
 1747987313908,Ilma,Ramz Photography,Photography,2025-06-22,07:45
 1747987354673,Kasun,Olu Floral,Floral Decorations,2025-06-29,08:00
-1747987427703,Kasun,Golden Wine Stores,Liqour,2025-06-30,18:30
+1747987427703,Kasun,Golden Wine Stores,Liquor,2025-06-30,18:30
 1747987463519,Tharuka,Olu Floral,Floral Decorations,2025-08-14,08:30
 1747987505638,Vishmi,Cinnamon Grand,Banquet Hall,2025-08-11,10:00
 1747987556788,Shenali,Vishmi Caters,Food Catering,2025-09-03,12:00
